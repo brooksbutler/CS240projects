@@ -37,12 +37,9 @@ public class EvilHangmanGame implements IEvilHangmanGame {
         } finally {
             if (scan != null) scan.close();
         }
-
         if(dictionary.length() == 0 || numWords == 0){
             throw new EmptyDictionaryException("Empty dictionary found");
         }
-
-
     }
 
     public String getFirstPattern(){
