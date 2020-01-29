@@ -63,6 +63,7 @@ public class EvilHangman {
                         }
                     }
                     printResponse(true, guess, numchars);
+                    guesses++;
                 }
                 else{
                     printResponse(false, guess, 0);
