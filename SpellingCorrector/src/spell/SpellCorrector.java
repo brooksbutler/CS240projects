@@ -24,7 +24,7 @@ public class SpellCorrector implements ISpellCorrector {
 
     @Override
     public String suggestSimilarWord(String inputWord) {
-        Set<String> firstEdit = new TreeSet<String>();
+        Set<String> firstEdit = new TreeSet<>();
         inputWord = inputWord.toLowerCase();
 
         if (Trie.find(inputWord) != null){
@@ -38,7 +38,7 @@ public class SpellCorrector implements ISpellCorrector {
 
             String suggestedWord = suggestWord(firstEdit);
             if (suggestedWord == null) {
-                Set<String> secondEdit = new TreeSet<String>();
+                Set<String> secondEdit = new TreeSet<>();
 
                 for(String s: firstEdit){
                     doInsertion(s, secondEdit);

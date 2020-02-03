@@ -16,7 +16,7 @@ public class Trie implements ITrie {
         root = new Node();
         nodeCount = 1;
         uniqueWordCount = 0;
-        prevWords = new TreeSet<String>();
+        prevWords = new TreeSet<>();
         globalFrequencyCount = 0;
     }
 
