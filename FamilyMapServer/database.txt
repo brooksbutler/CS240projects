@@ -1,0 +1,40 @@
+
+create table user
+(
+	user_name varchar(255) not null,
+	password varchar(255) not null,
+	email varchar(255) not null,
+	first_name varchar(255) not null,
+	last_name varchar(255) not null,
+	gender varchar(255) not null,
+	person_id varchar(255) not null	
+);
+
+
+create table person
+(
+	person_id varchar(255) not null,
+	user_name varchar(255),
+	first_name varchar(255) not null,
+	last_name varchar(255) not null,
+	gender varchar(255) not null,
+	father_id varchar(255),
+	mother_id varchar(255),
+	spouse_id varchar(255)
+);
+
+
+create table event
+(
+	event_id varchar(255) not null,
+	user_name varchar(255) not null,
+	person_id varchar(255) not null,
+	latitude integer not null,
+	longitude integer not null,
+	country varchar(255) not null,
+	city varchar(255) not null,
+	event_type varchar(255) not null,
+	year integer not null
+);
+
+
