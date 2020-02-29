@@ -6,7 +6,7 @@ import Model.EventModel;
  * A Result object for getting all events
  */
 public class EventGetAllResult {
-    private EventModel[] data;
+    private EventIDResult[] data;
     private transient boolean success;
     private transient String message;
 
@@ -16,11 +16,11 @@ public class EventGetAllResult {
     public EventGetAllResult(){
     }
 
-    public EventModel[] getData() {
+    public EventIDResult[] getData() {
         return data;
     }
 
-    public void setData(EventModel[] data) {
+    public void setData(EventIDResult[] data) {
         this.data = data;
     }
 

@@ -95,7 +95,36 @@ public class UserModel {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean equals(Object o) {
+        if (o == this) { return true; }
+        if (o == null) { return false; }
+        if (this.getClass() != o.getClass()) { return false; }
+
+        UserModel secondUser = (UserModel) o;
+
+        System.out.println(userName);
+        System.out.println(secondUser.userName);
+        System.out.println(password);
+        System.out.println(secondUser.password);
+        System.out.println(firstName);
+        System.out.println(secondUser.firstName);
+        System.out.println(lastName);
+        System.out.println(secondUser.lastName);
+        System.out.println(gender);
+        System.out.println(secondUser.gender);
+        System.out.println(personID);
+        System.out.println(secondUser.personID);
+
+
+        if (!userName.equals(secondUser.userName)) { return false; }
+        if (!password.equals(secondUser.password)) { return false; }
+        if (email != null && !email.equals(secondUser.email)) { return false; }
+        if (firstName != null && !firstName.equals(secondUser.firstName)) { return false; }
+        if (lastName != null && !lastName.equals(secondUser.lastName)) { return false; }
+        if (gender != null && !gender.equals(secondUser.gender)) { return false; }
+        if (personID!= null && !personID.equals(secondUser.personID)) { return false; }
+
+        System.out.println("It's true");
+        return true;
     }
 }

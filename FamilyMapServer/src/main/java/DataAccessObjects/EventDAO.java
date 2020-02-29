@@ -46,39 +46,6 @@ public class EventDAO {
     }
 
     /**
-     * Makes rot events for a person
-     * @param root
-     * @return
-     * @throws Database.DatabaseException
-     */
-    public int makeRootsEvents(PersonModel root) throws Database.DatabaseException {
-     return 0;
-    }
-
-    /**
-     * Generates event data on parents for a user
-     * @param mother
-     * @param father
-     * @param orphanBirthYear
-     * @return
-     * @throws Database.DatabaseException
-     */
-    public int generateEventDataParents(PersonModel mother,
-                                        PersonModel father,
-                                        int orphanBirthYear) throws Database.DatabaseException {
-        return 0;
-    }
-
-    /**
-     * Deletes all events relating to a specific user
-     * @param u
-     * @throws Database.DatabaseException
-     */
-    public void deleteAllEventsOfUser(UserModel u) throws Database.DatabaseException {
-
-    }
-
-    /**
      * Gets a single event based on an event ID
      * @param eventId
      * @return
@@ -98,15 +65,6 @@ public class EventDAO {
         return false;
     }
 
-    /**
-     * Get all events
-     * @param userName
-     * @return
-     * @throws Database.DatabaseException
-     */
-    public EventModel[] selectAllEvents(String userName) throws Database.DatabaseException{
-        return null;
-    }
 
     /**
      * Return the event table as a string object

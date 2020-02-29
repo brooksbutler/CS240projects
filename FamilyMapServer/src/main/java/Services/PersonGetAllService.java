@@ -1,5 +1,6 @@
 package Services;
 import DataAccessObjects.Database;
+import Model.PersonModel;
 import Result.PersonGetAllResult;
 /**
  *An service object which generates an PersonGetAllResult object
@@ -23,6 +24,16 @@ public class PersonGetAllService {
      * @return PersonGetAllResult object
      */
     public PersonGetAllResult personGetAll(String authToken){
+        return null;
+    }
+
+    /**
+     * Select all persons in the person table
+     * @param userName
+     * @return
+     * @throws Database.DatabaseException
+     */
+    public PersonModel[] selectAllPersons(String userName) throws Database.DatabaseException{
         return null;
     }
 }

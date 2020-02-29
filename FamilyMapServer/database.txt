@@ -1,39 +1,39 @@
 
-create table user
+create table users
 (
-	user_name varchar(255) not null,
+	userName varchar(255) not null unique,
 	password varchar(255) not null,
 	email varchar(255) not null,
-	first_name varchar(255) not null,
-	last_name varchar(255) not null,
+	firstName varchar(255) not null,
+	lastName varchar(255) not null,
 	gender varchar(255) not null,
-	person_id varchar(255) not null	
+	personID varchar(255) not null unique	
 );
 
 
-create table person
+create table persons
 (
-	person_id varchar(255) not null,
-	user_name varchar(255),
-	first_name varchar(255) not null,
-	last_name varchar(255) not null,
+	personID varchar(255) not null unique,
+	userName varchar(255) unique,
+	firstName varchar(255) not null,
+	lastName varchar(255) not null,
 	gender varchar(255) not null,
-	father_id varchar(255),
-	mother_id varchar(255),
-	spouse_id varchar(255)
+	fatherID varchar(255) unique,
+	motherID varchar(255) unique,
+	spouseID varchar(255) unique
 );
 
 
-create table event
+create table events
 (
-	event_id varchar(255) not null,
-	user_name varchar(255) not null,
-	person_id varchar(255) not null,
+	eventID varchar(255) not null unique,
+	userName varchar(255) not null unique,
+	personID varchar(255) not null unique,
 	latitude integer not null,
 	longitude integer not null,
 	country varchar(255) not null,
 	city varchar(255) not null,
-	event_type varchar(255) not null,
+	eventType varchar(255) not null,
 	year integer not null
 );
 

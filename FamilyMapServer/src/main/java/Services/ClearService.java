@@ -1,6 +1,7 @@
 package Services;
 
 import DataAccessObjects.Database;
+import Model.UserModel;
 import Result.ClearResult;
 
 /**
@@ -25,5 +26,27 @@ public class ClearService {
      */
     public ClearResult clear(){
         return null;
+    }
+
+    /**
+     * Deletes all events relating to a specific user
+     * @param u
+     * @throws Database.DatabaseException
+     */
+    public void deleteAllEventsOfUser(UserModel u) throws Database.DatabaseException {
+
+    }
+
+    /**
+     * Deletes all persons associated with a specified user
+     * @param u
+     * @throws Database.DatabaseException
+     */
+    public void deleteAllPeopleOfUser(UserModel u) throws Database.DatabaseException {
+
+    }
+
+    public void deleteUser(UserModel u) throws Database.DatabaseException {
+
     }
 }

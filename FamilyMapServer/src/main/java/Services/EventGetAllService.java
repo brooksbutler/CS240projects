@@ -1,6 +1,7 @@
 package Services;
 
 import DataAccessObjects.Database;
+import Model.EventModel;
 import Result.EventGetAllResult;
 /**
  *An service object which generates an EventGetAllResult object
@@ -24,6 +25,16 @@ public class EventGetAllService {
      * @return EventGetAllResult object
      */
     public EventGetAllResult eventGetAll(String authToken){
+        return null;
+    }
+
+    /**
+     * Get all events
+     * @param userName
+     * @return
+     * @throws Database.DatabaseException
+     */
+    public EventModel[] selectAllEvents(String userName) throws Database.DatabaseException{
         return null;
     }
 }

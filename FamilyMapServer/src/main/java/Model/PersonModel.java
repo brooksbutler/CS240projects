@@ -6,13 +6,13 @@ package Model;
 public class PersonModel {
 
     private String personID;
-    private String descendant;
+    private String userName;
     private String firstName;
     private String lastName;
     private String gender;
-    private String father;
-    private String mother;
-    private String spouse;
+    private String motherID;
+    private String fatherID;
+    private String spouseID;
 
     /**
      * Default constructor
@@ -35,12 +35,12 @@ public class PersonModel {
         this.personID = personID;
     }
 
-    public String getDescendant() {
-        return descendant;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setDescendant(String descendant) {
-        this.descendant = descendant;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getFirstName() {
@@ -67,32 +67,46 @@ public class PersonModel {
         this.gender = gender;
     }
 
-    public String getFather() {
-        return father;
+    public String getMotherID() {
+        return motherID;
     }
 
-    public void setFather(String father) {
-        this.father = father;
+    public void setMotherID(String motherID) {
+        this.motherID = motherID;
     }
 
-    public String getMother() {
-        return mother;
+    public String getFatherID() {
+        return fatherID;
     }
 
-    public void setMother(String mother) {
-        this.mother = mother;
+    public void setFatherID(String fatherID) {
+        this.fatherID = fatherID;
     }
 
-    public String getSpouse() {
-        return spouse;
+    public String getSpouseID() {
+        return spouseID;
     }
 
-    public void setSpouse(String spouse) {
-        this.spouse = spouse;
+    public void setSpouseID(String spouseID) {
+        this.spouseID = spouseID;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean equals(Object o) {
+        if (o == this) { return true; }
+        if (o == null) { return false; }
+        if (getClass() != o.getClass()) { return false; }
+
+        PersonModel secondPerson = (PersonModel) o;
+
+        if (!personID.equals(secondPerson.personID)) { return false; }
+        if (!userName.equals(secondPerson.userName)) { return false; }
+        if (!firstName.equals(secondPerson.firstName)) { return false; }
+        if (!lastName.equals(secondPerson.lastName)) { return false; }
+        if (!gender.equals(secondPerson.gender)) { return false; }
+        if (fatherID != null && !fatherID.equals(secondPerson.fatherID)) { return false; }
+        if (motherID != null && !motherID.equals(secondPerson.motherID)) { return false; }
+        if (spouseID != null && !spouseID.equals(secondPerson.spouseID)) { return false; }
+        return true;
     }
 }

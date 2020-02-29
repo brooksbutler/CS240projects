@@ -6,7 +6,7 @@ import Model.PersonModel;
  */
 public class PersonGetAllResult {
     private transient String message;
-    private PersonModel[] data;
+    private PersonIDResult[] data;
     private transient boolean success;
 
     /**
@@ -23,11 +23,11 @@ public class PersonGetAllResult {
         this.message = message;
     }
 
-    public PersonModel[] getData() {
+    public PersonIDResult[] getData() {
         return data;
     }
 
-    public void setData(PersonModel[] data) {
+    public void setData(PersonIDResult[] data) {
         this.data = data;
     }
 

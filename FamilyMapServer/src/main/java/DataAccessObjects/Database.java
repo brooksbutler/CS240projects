@@ -22,7 +22,17 @@ public class Database {
      * An exception class which is thrown if any error occurs in the DAO methods
      */
     public static class DatabaseException extends Exception {
+        private String message;
 
+        public DatabaseException(){
+            message = new String();
+        }
+        public DatabaseException(String message){
+            this.message = message;
+        }
+        public String getMessage(){
+            return message;
+        }
     }
 
     private UserDAO myUserDAO;
@@ -46,7 +56,24 @@ public class Database {
      * @throws DatabaseException
      */
     public void openConnection() throws DatabaseException {
+        try {
+            final String CONNECTION_URL = "jdbc:sqlite:database.sqlite";
 
+            // Open a database connection
+            conn = DriverManager.getConnection(CONNECTION_URL);
+
+            //Sets connections for DAOs
+            myUserDAO.setConnection(conn);
+            myEventDAO.setConnection(conn);
+            myPersonDAO.setConnection(conn);
+            myAuthTokenDAO.setConnection(conn);
+
+            // Start a transaction
+            conn.setAutoCommit(false);
+        }
+        catch (SQLException e) {
+            throw new DatabaseException("Opening connection failed");
+        }
     }
 
     /**
@@ -54,7 +81,10 @@ public class Database {
      * @throws DatabaseException
      */
     public void resetTables() throws DatabaseException {
-
+        myUserDAO.resetTable();
+        myPersonDAO.resetTable();
+        myEventDAO.resetTable();
+        myAuthTokenDAO.resetTable();
     }
 
     /**
@@ -72,7 +102,19 @@ public class Database {
      * @throws DatabaseException
      */
     public void closeConnection(boolean commit) throws DatabaseException {
-
+        try {
+            if (commit) {
+                conn.commit();
+            }
+            else {
+                conn.rollback();
+            }
+            conn.close();
+            conn = null;
+        }
+        catch (SQLException e) {
+            throw new DatabaseException("closeConnection failed");
+        }
     }
 
     public UserDAO getMyUserDAO() {
