@@ -35,6 +35,10 @@ public class Database {
         }
     }
 
+    public Connection getConn() {
+        return conn;
+    }
+
     private UserDAO myUserDAO;
     private PersonDAO myPersonDAO;
     private EventDAO myEventDAO;

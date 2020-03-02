@@ -1,15 +1,10 @@
 package DataAccessObjects;
 
-import Model.PersonModel;
 import Model.UserModel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.UUID;
-
-import java.sql.Connection;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserDAOTest {
@@ -48,9 +43,7 @@ class UserDAOTest {
         UserModel compareTest = null;
 
         try {
-            System.out.println("entered try");
             myUserDAO.insertUser(bestUser);
-            System.out.println("Inserted user");
 
             compareTest = myUserDAO.getUserModel(bestUser.getUserName());
             db.closeConnection(true);
@@ -60,7 +53,6 @@ class UserDAOTest {
         assertNotNull(compareTest);
 
         assertEquals(bestUser, compareTest);
-        System.out.println("Asserted equals");
     }
 
     @Test
@@ -87,7 +79,6 @@ class UserDAOTest {
         }
         //Now make sure that compareTest is indeed null
         assertNull(compareTest);
-        System.out.println("Asserted true");
     }
 
 
@@ -178,7 +169,7 @@ class UserDAOTest {
             db.closeConnection(true);
 
             db.openConnection();
-            resetTest = myUserDAO.getUserModel(bestUser.getPersonID());
+            resetTest = myUserDAO.getUserModel(bestUser.getUserName());
             db.closeConnection(true);
         }catch (Database.DatabaseException e){
             db.closeConnection(false);

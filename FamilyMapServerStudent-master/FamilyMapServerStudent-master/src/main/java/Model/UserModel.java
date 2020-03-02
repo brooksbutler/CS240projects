@@ -2,6 +2,9 @@ package Model;
 
 import Request.RegisterRequest;
 import Request.LoginRequest;
+
+import java.util.UUID;
+
 /**
  * Model object for users
  */
@@ -27,7 +30,13 @@ public class UserModel {
      * @param r
      */
     public UserModel(RegisterRequest r){
-
+        this.userName = r.getUserName();
+        this.password = r.getPassword();
+        this.email = r.getEmail();
+        this.firstName = r.getFirstName();
+        this.lastName = r.getLastName();
+        this.gender = r.getGender();
+        this.personID = UUID.randomUUID().toString();
     }
 
     /**
@@ -35,7 +44,13 @@ public class UserModel {
      * @param l
      */
     public UserModel(LoginRequest l){
-
+        this.userName = l.getUserName();
+        this.password = l.getPassword();
+        email = "";
+        firstName = "";
+        lastName = "";
+        gender = "";
+        personID = "";
     }
 
     public String getUserName() {
@@ -101,19 +116,6 @@ public class UserModel {
         if (this.getClass() != o.getClass()) { return false; }
 
         UserModel secondUser = (UserModel) o;
-
-        System.out.println(userName);
-        System.out.println(secondUser.userName);
-        System.out.println(password);
-        System.out.println(secondUser.password);
-        System.out.println(firstName);
-        System.out.println(secondUser.firstName);
-        System.out.println(lastName);
-        System.out.println(secondUser.lastName);
-        System.out.println(gender);
-        System.out.println(secondUser.gender);
-        System.out.println(personID);
-        System.out.println(secondUser.personID);
 
 
         if (!userName.equals(secondUser.userName)) { return false; }

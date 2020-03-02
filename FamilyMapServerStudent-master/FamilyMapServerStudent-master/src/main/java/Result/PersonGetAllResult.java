@@ -27,8 +27,9 @@ public class PersonGetAllResult {
         return data;
     }
 
-    public void setData(PersonIDResult[] data) {
-        this.data = data;
+    public void setData(PersonIDResult[] input) {
+        data = new PersonIDResult[input.length];
+        System.arraycopy(input, 0, data, 0, input.length);
     }
 
     public boolean isSuccess() {
@@ -40,7 +41,24 @@ public class PersonGetAllResult {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean equals(Object o) {
+        if (o == this) { return true; }
+        if (o == null) { return false; }
+        if (this.getClass() != o.getClass()) { return false; }
+
+        PersonGetAllResult secondResult = (PersonGetAllResult) o;
+
+        if (success != secondResult.success) { return false; }
+        if (message == null && secondResult.message != null) { return false; }
+        if (message != null && secondResult.message == null){ return false; }
+        if (message != null && secondResult.message != null){
+            if (!message.equals(secondResult.message)){ return false; }
+        }
+        if (data != null){
+            for (int i = 0; i < data.length; i++){
+                if (!data[i].equals(secondResult.data[i])){ return false; }
+            }
+        }
+        return true;
     }
 }

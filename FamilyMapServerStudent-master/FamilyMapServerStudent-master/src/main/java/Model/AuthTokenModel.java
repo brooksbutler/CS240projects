@@ -16,9 +16,12 @@ public class AuthTokenModel {
      * Defualt constructor
      */
     public AuthTokenModel(){
-        authToken = new String();
-        personID = new String();
-        userName = new String();
+
+    }
+    public AuthTokenModel(String authToken, String personID, String userName){
+        this.authToken = authToken;
+        this.personID = personID;
+        this. userName = userName;
     }
 
     /**
@@ -56,7 +59,15 @@ public class AuthTokenModel {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean equals(Object o) {
+        if (o == this) { return true; }
+        if (o == null) { return false; }
+        if (this.getClass() != o.getClass()) { return false; }
+        AuthTokenModel secondEvent = (AuthTokenModel) o;
+
+        if (!authToken.equals(secondEvent.authToken)) { return false; }
+        if (!userName.equals(secondEvent.userName)) { return false; }
+        if (!personID.equals(secondEvent.personID)) { return false; }
+        return true;
     }
 }

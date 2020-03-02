@@ -15,6 +15,10 @@ public class RegisterResult {
      * Default constructor
      */
     public RegisterResult(){
+        success = false;
+        authToken = "";
+        userName = "";
+        personId = "";
     }
 
     /**
@@ -22,6 +26,9 @@ public class RegisterResult {
      * @param a
      */
     public RegisterResult(AuthTokenModel a){
+        authToken = a.getAuthToken();
+        userName = a.getUserName();
+        personId = a.getPersonID();
     }
 
     public void setAuthToken(String intput){
@@ -61,7 +68,22 @@ public class RegisterResult {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean equals(Object o) {
+        if (o == this) { return true; }
+        if (o == null) { return false; }
+        if (this.getClass() != o.getClass()) { return false; }
+
+        RegisterResult secondResult = (RegisterResult) o;
+
+        if(!authToken.equals(secondResult.authToken)){ return false; }
+        if(!userName.equals(secondResult.userName)){ return false; }
+        if(!personId.equals(secondResult.personId)){ return false; }
+        if(success != secondResult.success) { return false; }
+        if(message == null && secondResult.message != null) { return false; }
+        if (message != null && secondResult.message == null){ return false; }
+        if (message != null && secondResult.message != null){
+            if (!message.equals(secondResult.message)){ return false; }
+        }
+        return true;
     }
 }

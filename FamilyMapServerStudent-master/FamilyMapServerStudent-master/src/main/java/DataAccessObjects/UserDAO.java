@@ -102,7 +102,33 @@ public class UserDAO {
      * @throws Database.DatabaseException
      */
     public boolean doesUserNameExist(String u) throws Database.DatabaseException {
-        return false;
+        try {
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            try {
+                String sql = "select * from users WHERE userName = '" + u + "'";
+                stmt = conn.prepareStatement(sql);
+
+                rs = stmt.executeQuery();
+
+                if (!rs.next() ) {
+                    throw new Database.DatabaseException("no such username");
+                } else {
+                    return true;
+                }
+            }
+            finally {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+            }
+        }
+        catch (SQLException e) {
+            throw new Database.DatabaseException("no such username");
+        }
     }
 
     /**
@@ -168,6 +194,27 @@ public class UserDAO {
      * @throws Database.DatabaseException
      */
     public String getPersonIDOfUser(UserModel u) throws Database.DatabaseException {
-        return null;
+        String personID = new String();
+        try {
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            try {
+                String sql = "select * from users WHERE userName = '" + u.getUserName() + "' AND password = '" + u.getPassword() + "'";
+                stmt = conn.prepareStatement(sql);
+
+                rs = stmt.executeQuery();
+                while (rs.next()) {
+                    personID = rs.getString(7);
+                }
+            }
+            finally {
+                if (rs != null) { rs.close(); }
+                if (stmt != null) { stmt.close(); }
+            }
+        }
+        catch (SQLException e) {
+            throw new Database.DatabaseException("getPersonIDOfUser failed");
+        }
+        return personID;
     }
 }

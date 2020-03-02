@@ -83,14 +83,56 @@ public class PersonDAO {
     }
 
     /**
-     * Updates the parents of a person
+     *
      * @param p
-     * @param parentID
-     * @param parentGender
+     * @param motherID
      * @throws Database.DatabaseException
      */
-    public void updateParent(PersonModel p, String parentID, String parentGender) throws Database.DatabaseException{
+    public void updateMother(PersonModel p, String motherID) throws Database.DatabaseException{
+        try {
+            Statement stmt = null;
+            try {
+                String sql = "UPDATE people\n" +
+                        "SET motherID = '" + motherID + "' " +
+                        "WHERE personID = '" + p.getPersonID() + "'";
+                stmt = conn.createStatement();
+                stmt.executeUpdate(sql);
+            }
+            finally {
+                if (stmt != null) { stmt.close(); }
+            }
+        }
+        catch (SQLException e) {
+            throw new Database.DatabaseException("update Mother failed");
+        }
+    }
 
+    /**
+     *
+     * @param p
+     * @param fatherID
+     * @throws Database.DatabaseException
+     */
+    public void updateFather(PersonModel p, String fatherID) throws Database.DatabaseException{
+        try {
+            Statement stmt = null;
+            try {
+
+                String sql = "UPDATE people\n" +
+                        "SET fatherID = '" + fatherID + "' " +
+                        "WHERE personID = '" + p.getPersonID() + "'";
+                stmt = conn.createStatement();
+                stmt.executeUpdate(sql);
+            }
+            finally {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            }
+        }
+        catch (SQLException e) {
+            throw new Database.DatabaseException("updateFather failed");
+        }
     }
 
     /**
@@ -100,28 +142,22 @@ public class PersonDAO {
      * @throws Database.DatabaseException
      */
     public void updateSpouse(PersonModel person, String spouseID) throws Database.DatabaseException{
-
-    }
-
-    /**
-     * Make parents for a person
-     * @param orphan
-     * @param parentGender
-     * @return
-     * @throws Database.DatabaseException
-     */
-    public PersonModel makeParent(PersonModel orphan, String parentGender) throws Database.DatabaseException {
-        return null;
-    }
-
-
-    /**
-     * Return the person table as a string object
-     * @return
-     * @throws Database.DatabaseException
-     */
-    public String tableToString() throws Database.DatabaseException{
-        return null;
+        try {
+            Statement stmt = null;
+            try {
+                String sql = "UPDATE people\n" +
+                        "SET spouseID = '" + spouseID + "' " +
+                        "WHERE personID = '" + person.getPersonID() + "'";
+                stmt = conn.createStatement();
+                stmt.executeUpdate(sql);
+            }
+            finally {
+                if (stmt != null) { stmt.close(); }
+            }
+        }
+        catch (SQLException e) {
+            throw new Database.DatabaseException("update Spouse failed");
+        }
     }
 
     /**
@@ -166,11 +202,30 @@ public class PersonDAO {
 
     /**
      * Check if a person in the the person table
-     * @param personId
+     * @param personID
      * @return
      * @throws Database.DatabaseException
      */
-    public boolean doesPersonExist(String personId) throws Database.DatabaseException{
-        return false;
+    public boolean doesPersonExist(String personID) throws Database.DatabaseException{
+        try {
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            try {
+                String sql = "select * from persons WHERE personID = '" + personID + "'";
+                stmt = conn.prepareStatement(sql);
+                rs = stmt.executeQuery();
+                if (!rs.next() ) {
+                    throw new Database.DatabaseException("no such personID");
+                }
+                else { return true; }
+            }
+            finally {
+                if (rs != null) { rs.close(); }
+                if (stmt != null) { stmt.close(); }
+            }
+        }
+        catch (SQLException e) {
+            throw new Database.DatabaseException("no such personID");
+        }
     }
 }

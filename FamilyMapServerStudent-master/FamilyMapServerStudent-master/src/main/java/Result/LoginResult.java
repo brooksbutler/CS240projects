@@ -16,6 +16,11 @@ public class LoginResult {
      * Default constructor
      */
     public LoginResult(){
+        authToken = "";
+        userName = "";
+        personId = "";
+        success = false;
+        message = "";
     }
 
     /**
@@ -23,6 +28,11 @@ public class LoginResult {
      * @param a
      */
     public LoginResult(AuthTokenModel a){
+        this.authToken = a.getAuthToken();
+        this.userName = a.getUserName();
+        this.personId = a.getPersonID();
+        success = true;
+        message = "";
     }
 
     public void setSuccess(boolean b){
@@ -58,7 +68,22 @@ public class LoginResult {
     public String getPersonId(){return personId;}
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean equals(Object o) {
+        if (o == this) { return true; }
+        if (o == null) { return false; }
+        if (this.getClass() != o.getClass()) { return false; }
+
+        LoginResult secondResponse = (LoginResult) o;
+
+        if(!userName.equals(secondResponse.userName)){ return false; }
+        if(!authToken.equals(secondResponse.authToken)){ return false; }
+        if(!personId.equals(secondResponse.personId)){ return false; }
+        if (success != secondResponse.success) { return false; }
+        if (message == null && secondResponse.message != null) { return false; }
+        if (message != null && secondResponse.message == null){ return false; }
+        if (message != null && secondResponse.message != null){
+            if (!message.equals(secondResponse.message)){ return false; }
+        }
+        return true;
     }
 }

@@ -25,7 +25,28 @@ public class ClearService {
      * @return ClearResult object
      */
     public ClearResult clear(){
-        return null;
+        ClearResult result = new ClearResult();
+        try{
+            myDB.openConnection();
+            myDB.resetTables();
+
+            myDB.closeConnection(true);
+
+        } catch (Database.DatabaseException e){
+            System.out.println(e.getMessage());
+            result.setMessage("Internal server error");
+
+            try{
+                myDB.closeConnection(false);
+            }catch (Database.DatabaseException d){
+                result.setMessage(d.getMessage());
+                return result;
+            }
+
+            return result;
+        }
+        result.setMessage("Clear succeeded");
+        return result;
     }
 
     /**

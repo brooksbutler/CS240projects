@@ -20,11 +20,24 @@ public class PersonModel {
     public PersonModel(){
     }
 
+    public PersonModel(String personID, String userName, String firstName, String lastName, String gender){
+        this.personID = personID;
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+    }
+
     /**
      * Public constructor for generating a person for a user
-     * @param u
+     * @param user
      */
-    public PersonModel(UserModel u){
+    public PersonModel(UserModel user){
+        this.personID = user.getPersonID();
+        this.userName = user.getUserName();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.gender = user.getGender();
     }
 
     public String getPersonID() {

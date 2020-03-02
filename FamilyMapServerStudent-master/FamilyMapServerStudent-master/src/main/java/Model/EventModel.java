@@ -5,7 +5,7 @@ package Model;
 public class EventModel {
 
     private String eventID;
-    private String descendant;
+    private String userName;
     private String personID;
     private Double latitude;
     private Double longitude;
@@ -18,7 +18,18 @@ public class EventModel {
      * Default constructor
      */
     public EventModel(){
-
+    }
+    public EventModel(String eventID, String userName, String personID, Double latitude, Double longitude,
+                      String country,String city, String eventType, int year){
+        this.eventID = eventID;
+        this.userName = userName;
+        this.personID = personID;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.country = country;
+        this.city = city;
+        this.eventType = eventType;
+        this.year = year;
     }
 
     public String getEventID() {
@@ -29,12 +40,12 @@ public class EventModel {
         this.eventID = eventID;
     }
 
-    public String getDescendant() {
-        return descendant;
+    public String geUserName() {
+        return userName;
     }
 
-    public void setDescendant(String descendant) {
-        this.descendant = descendant;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPersonID() {
@@ -94,7 +105,21 @@ public class EventModel {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean equals(Object o) {
+        if (o == this) { return true; }
+        if (o == null) { return false; }
+        if (this.getClass() != o.getClass()) { return false; }
+        EventModel secondEvent = (EventModel) o;
+
+        if (!eventID.equals(secondEvent.eventID)) { return false; }
+        if (!userName.equals(secondEvent.userName)) { return false; }
+        if (!personID.equals(secondEvent.personID)) { return false; }
+        if (!latitude.equals(secondEvent.latitude)) { return false; }
+        if (!longitude.equals(secondEvent.longitude)) { return false; }
+        if (!country.equals(secondEvent.country)) { return false; }
+        if (!city.equals(secondEvent.city)) { return false; }
+        if (!eventType.equals(secondEvent.eventType)) { return false; }
+        if (year != secondEvent.year){ return false; }
+        return true;
     }
 }

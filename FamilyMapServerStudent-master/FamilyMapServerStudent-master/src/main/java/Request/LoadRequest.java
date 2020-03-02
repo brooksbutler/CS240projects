@@ -24,23 +24,26 @@ public class LoadRequest {
         return users;
     }
 
-    public void setUsers(UserModel[] users) {
-        this.users = users;
+    public void setUsers(UserModel[] input) {
+        users = new UserModel[input.length];
+        System.arraycopy(input, 0, users, 0, input.length);
     }
 
     public PersonModel[] getPersons() {
         return persons;
     }
 
-    public void setPersons(PersonModel[] persons) {
-        this.persons = persons;
+    public void setPersons(PersonModel[] input) {
+        persons = new PersonModel[input.length];
+        System.arraycopy(input, 0, persons, 0, input.length);
     }
 
     public EventModel[] getEvents() {
         return events;
     }
 
-    public void setEvents(EventModel[] events) {
-        this.events = events;
+    public void setEvents(EventModel[] input) {
+        events = new EventModel[input.length];
+        System.arraycopy(input, 0, events, 0, input.length);
     }
 }

@@ -14,6 +14,8 @@ public class FillResult {
      * Public constructor
      */
     public FillResult(){
+        success = false;
+        message = "";
     }
 
     public boolean isSuccess() {
@@ -49,7 +51,21 @@ public class FillResult {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean equals(Object o) {
+        if (o == this) { return true; }
+        if (o == null) { return false; }
+        if (this.getClass() != o.getClass()) { return false; }
+
+        FillResult secondResult = (FillResult) o;
+
+        if(numEvents != secondResult.numEvents){ return false; }
+        if(numPersons != secondResult.numPersons){ return false; }
+        if(success != secondResult.success) { return false; }
+        if(message == null && secondResult.message != null) { return false; }
+        if(message != null && secondResult.message == null){ return false; }
+        if(message != null && secondResult.message != null){
+            if (!message.equals(secondResult.message)){ return false; }
+        }
+        return true;
     }
 }

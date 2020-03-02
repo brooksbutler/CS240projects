@@ -20,8 +20,9 @@ public class EventGetAllResult {
         return data;
     }
 
-    public void setData(EventIDResult[] data) {
-        this.data = data;
+    public void setData(EventIDResult[] input) {
+        data = new EventIDResult[input.length];
+        System.arraycopy(input, 0, data, 0, input.length);
     }
 
     public boolean isSuccess() {
@@ -38,5 +39,27 @@ public class EventGetAllResult {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) { return true; }
+        if (o == null) { return false; }
+        if (this.getClass() != o.getClass()) { return false; }
+
+        EventGetAllResult secondResult = (EventGetAllResult) o;
+
+        if (success != secondResult.success) { return false; }
+        if (message == null && secondResult.message != null) { return false; }
+        if (message != null && secondResult.message == null){ return false; }
+        if (message != null && secondResult.message != null){
+            if (!message.equals(secondResult.message)){ return false; }
+        }
+        if (data!= null){
+            for (int i = 0; i < data.length; i++){
+                if (!data[i].equals(secondResult.data[i])){ return false; }
+            }
+        }
+        return true;
     }
 }
