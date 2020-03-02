@@ -45,14 +45,17 @@ public class FillService {
         StringArray temp3 = Decoder.decodeNames("json/snames.json"); //  gson.fromJson(new FileReader("snames.json"), StringArray.class);
 
         for (int i = 0; i < 147; i++){
+            assert temp != null;
             femaleNames[i] = temp.getValueAt(i);
         }
 
         for (int i = 0; i < 142; i++){
+            assert temp2 != null;
             maleNames[i] = temp2.getValueAt(i);
         }
 
         for (int i = 0; i < 150; i++){
+            assert temp3 != null;
             lastNames[i] = temp3.getValueAt(i);
         }
     }
