@@ -114,9 +114,7 @@ public class AuthTokenDAO {
             try {
                 String sql = "select * from authTokens WHERE authToken = '" + authToken + "'";
                 stmt = conn.prepareStatement(sql);
-
                 rs = stmt.executeQuery();
-
                 if (!rs.next() ) {
                     throw new Database.DatabaseException("no such authToken");
                 } else {
@@ -124,12 +122,8 @@ public class AuthTokenDAO {
                 }
             }
             finally {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (stmt != null) {
-                    stmt.close();
-                }
+                if (rs != null) { rs.close(); }
+                if (stmt != null) { stmt.close(); }
             }
         }
         catch (SQLException e) {
@@ -138,25 +132,34 @@ public class AuthTokenDAO {
     }
 
     /**
-     * Get the authenticator token model object
-     * @param auth
-     * @return
-     * @throws Database.DatabaseException
-     */
-
-
-    /**
      * Return a string object of the entire table
      * @return
      * @throws Database.DatabaseException
      */
     public String tableToString() throws Database.DatabaseException{
-        return null;
+        StringBuilder out = new StringBuilder();
+        try {
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            try {
+                String sql = "select * from authTokens";
+                stmt = conn.prepareStatement(sql);
+                rs = stmt.executeQuery();
+                while (rs.next()) {
+                    String word = rs.getString(1);
+                    String password = rs.getString(2);
+                    String email = rs.getString(3);
+                    out.append((word + "\t" + password + "\t" + email + "\n"));
+                }
+            }
+            finally {
+                if (rs != null) { rs.close(); }
+                if (stmt != null) { stmt.close(); }
+            }
+        }
+        catch (SQLException e) {
+            throw new Database.DatabaseException("seeTable auth failed");
+        }
+        return out.toString();
     }
-
-
-
-
-
-
 }

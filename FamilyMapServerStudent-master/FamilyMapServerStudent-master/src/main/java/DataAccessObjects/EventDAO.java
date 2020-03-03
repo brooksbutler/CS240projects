@@ -168,8 +168,53 @@ public class EventDAO {
      * @throws Database.DatabaseException
      */
     public String tableToString() throws Database.DatabaseException {
-        return null;
+        StringBuilder out = new StringBuilder();
+        try {
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            try {
+                String sql = "select * from events";
+                stmt = conn.prepareStatement(sql);
+                rs = stmt.executeQuery();
+                while (rs.next()) {
+                    String eventID = rs.getString(1);
+                    String userName = rs.getString(2);
+                    String personId = rs.getString(3);
+                    Double latitude = rs.getDouble(4);
+                    Double longitude = rs.getDouble(5);
+                    String country = rs.getString(6);
+                    String city = rs.getString(7);
+                    String eventType = rs.getString(8);
+                    int year = rs.getInt(9);
+
+                    out.append((eventID + "\t" + userName + "\t" + personId + "\t" + latitude + "\t" +
+                            longitude + "\t" + country + "\t" + city + "\t" + eventType + "\t" + year + "\n"));
+                }
+            }
+            finally {
+                if (rs != null) { rs.close(); }
+                if (stmt != null) { stmt.close(); }
+            }
+        }
+        catch (SQLException e) {
+            throw new Database.DatabaseException("Table to string events failed");
+        }
+        return out.toString();
     }
 
-
+    public void deleteAllEventsOfUser(UserModel u) throws Database.DatabaseException {
+        try {
+            Statement stmt = null;
+            try {
+                stmt = conn.createStatement();
+                stmt.executeUpdate("DELETE FROM events WHERE userName = '" + u.getUserName() + "'");
+            }
+            finally {
+                if (stmt != null) { stmt.close(); }
+            }
+        }
+        catch (SQLException e) {
+            throw new Database.DatabaseException("deleteAllEventsOfUser failed");
+        }
+    }
 }

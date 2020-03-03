@@ -48,26 +48,4 @@ public class ClearService {
         result.setMessage("Clear succeeded");
         return result;
     }
-
-    /**
-     * Deletes all events relating to a specific user
-     * @param u
-     * @throws Database.DatabaseException
-     */
-    public void deleteAllEventsOfUser(UserModel u) throws Database.DatabaseException {
-
-    }
-
-    /**
-     * Deletes all persons associated with a specified user
-     * @param u
-     * @throws Database.DatabaseException
-     */
-    public void deleteAllPeopleOfUser(UserModel u) throws Database.DatabaseException {
-
-    }
-
-    public void deleteUser(UserModel u) throws Database.DatabaseException {
-
-    }
 }

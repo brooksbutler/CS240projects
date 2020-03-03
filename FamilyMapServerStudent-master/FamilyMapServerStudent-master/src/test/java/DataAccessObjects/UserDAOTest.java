@@ -176,30 +176,4 @@ class UserDAOTest {
         }
         assertNull(resetTest);
     }
-
-//    @Test
-//    void setConnection() {
-//    }
-//
-//
-//
-//    @Test
-//    void tableToString() {
-//    }
-//
-//    @Test
-//    void doesUserNameExist() {
-//    }
-//
-//    @Test
-//    void deleteUser() {
-//    }
-//
-//    @Test
-//    void doUsernameAndPasswordExist() {
-//    }
-//
-//    @Test
-//    void getPersonIDOfUser() {
-//    }
 }

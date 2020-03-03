@@ -92,7 +92,7 @@ public class PersonDAO {
         try {
             Statement stmt = null;
             try {
-                String sql = "UPDATE people\n" +
+                String sql = "UPDATE persons\n" +
                         "SET motherID = '" + motherID + "' " +
                         "WHERE personID = '" + p.getPersonID() + "'";
                 stmt = conn.createStatement();
@@ -117,8 +117,7 @@ public class PersonDAO {
         try {
             Statement stmt = null;
             try {
-
-                String sql = "UPDATE people\n" +
+                String sql = "UPDATE persons\n" +
                         "SET fatherID = '" + fatherID + "' " +
                         "WHERE personID = '" + p.getPersonID() + "'";
                 stmt = conn.createStatement();
@@ -145,7 +144,7 @@ public class PersonDAO {
         try {
             Statement stmt = null;
             try {
-                String sql = "UPDATE people\n" +
+                String sql = "UPDATE persons\n" +
                         "SET spouseID = '" + spouseID + "' " +
                         "WHERE personID = '" + person.getPersonID() + "'";
                 stmt = conn.createStatement();
@@ -226,6 +225,55 @@ public class PersonDAO {
         }
         catch (SQLException e) {
             throw new Database.DatabaseException("no such personID");
+        }
+    }
+
+    public String tableToString() throws Database.DatabaseException{
+        StringBuilder out = new StringBuilder();
+        try {
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            try {
+                String sql = "select * from persons";
+                stmt = conn.prepareStatement(sql);
+                rs = stmt.executeQuery();
+                while (rs.next()) {
+                    String word = rs.getString(1);
+                    String password = rs.getString(2);
+                    String email = rs.getString(3);
+                    String firstName = rs.getString(4);
+                    String lastName = rs.getString(5);
+                    String gender = rs.getString(6);
+                    String personID = rs.getString(7);
+                    String extra = rs.getString(8);
+                    out.append((word + "\t" + password + "\t" + email + "\t" + firstName +
+                            "\t" + lastName + "\t" + gender + "\t" + personID + "\t" + extra + "\n"));
+                }
+            }
+            finally {
+                if (rs != null) { rs.close(); }
+                if (stmt != null) { stmt.close(); }
+            }
+        }
+        catch (SQLException e) {
+            throw new Database.DatabaseException("seePeopleTable failed");
+        }
+        return out.toString();
+    }
+
+    public void deleteAllPeopleOfUser(UserModel u) throws Database.DatabaseException {
+        try {
+            Statement stmt = null;
+            try {
+                stmt = conn.createStatement();
+                stmt.executeUpdate("DELETE FROM persons WHERE userName = '" + u.getUserName() + "'");
+            }
+            finally {
+                if (stmt != null) { stmt.close(); }
+            }
+        }
+        catch (SQLException e) {
+            throw new Database.DatabaseException("deleteAllPeopleOfUser failed");
         }
     }
 }

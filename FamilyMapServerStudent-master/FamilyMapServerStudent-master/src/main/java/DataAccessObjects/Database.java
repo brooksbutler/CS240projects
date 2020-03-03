@@ -96,8 +96,10 @@ public class Database {
      * @param u UserModel object
      * @throws DatabaseException
      */
-    public void deleteEverythingOfUser(UserModel u) throws DatabaseException {
-
+    public void deleteEverythingOfUser(UserModel u) throws DatabaseException { //does not make new usermodel of username given
+        myUserDAO.deleteUser(u);
+        myPersonDAO.deleteAllPeopleOfUser(u);
+        myEventDAO.deleteAllEventsOfUser(u);
     }
 
     /**

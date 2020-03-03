@@ -87,15 +87,6 @@ public class UserDAO {
     }
 
     /**
-     * Returns the user table as a string object
-     * @return
-     * @throws Database.DatabaseException
-     */
-    public String tableToString() throws Database.DatabaseException{
-        return null;
-    }
-
-    /**
      * Check if a username is in the database
      * @param u
      * @return
@@ -108,9 +99,7 @@ public class UserDAO {
             try {
                 String sql = "select * from users WHERE userName = '" + u + "'";
                 stmt = conn.prepareStatement(sql);
-
                 rs = stmt.executeQuery();
-
                 if (!rs.next() ) {
                     throw new Database.DatabaseException("no such username");
                 } else {
@@ -118,24 +107,14 @@ public class UserDAO {
                 }
             }
             finally {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (stmt != null) {
-                    stmt.close();
-                }
+                if (rs != null) { rs.close(); }
+                if (stmt != null) { stmt.close(); }
             }
         }
         catch (SQLException e) {
             throw new Database.DatabaseException("no such username");
         }
     }
-
-    /**
-     * Remove a user
-     * @param u
-     * @throws Database.DatabaseException
-     */
 
 
     /**
@@ -184,7 +163,28 @@ public class UserDAO {
      * @throws Database.DatabaseException
      */
     public boolean doUsernameAndPasswordExist(UserModel u) throws Database.DatabaseException{
-        return false;
+        try {
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            try {
+                String sql = "select * from users WHERE userName = '" + u.getUserName() +
+                        "' AND password = '" + u.getPassword() + "'";
+                stmt = conn.prepareStatement(sql);
+                rs = stmt.executeQuery();
+                if (!rs.next() ) {
+                    throw new Database.DatabaseException("no such username and/or password");
+                } else {
+                    return true;
+                }
+            }
+            finally {
+                if (rs != null) { rs.close(); }
+                if (stmt != null) { stmt.close(); }
+            }
+        }
+        catch (SQLException e) {
+            throw new Database.DatabaseException("no such username and/or password");
+        }
     }
 
     /**
@@ -216,5 +216,58 @@ public class UserDAO {
             throw new Database.DatabaseException("getPersonIDOfUser failed");
         }
         return personID;
+    }
+
+    /**
+     * Returns the user table as a string object
+     * @return
+     * @throws Database.DatabaseException
+     */
+    public String tableToString() throws Database.DatabaseException{
+        StringBuilder out = new StringBuilder();
+        try {
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            try {
+                String sql = "select * from users";
+                stmt = conn.prepareStatement(sql);
+                rs = stmt.executeQuery();
+                while (rs.next()) {
+                    String word = rs.getString(1);
+                    String password = rs.getString(2);
+                    String email = rs.getString(3);
+                    String firstName = rs.getString(4);
+                    String lastName = rs.getString(5);
+                    String gender = rs.getString(6);
+                    String personID = rs.getString(7);
+                    out.append((word + "\t" + password + "\t" + email + "\t" + firstName +
+                            "\t" + lastName + "\t" + gender + "\t" + personID + "\n"));
+                }
+            }
+            finally {
+                if (rs != null) { rs.close(); }
+                if (stmt != null) { stmt.close(); }
+            }
+        }
+        catch (SQLException e) {
+            throw new Database.DatabaseException("seeTable users failed");
+        }
+        return out.toString();
+    }
+
+    public void deleteUser(UserModel u) throws Database.DatabaseException {
+        try {
+            Statement stmt = null;
+            try {
+                stmt = conn.createStatement();
+                stmt.executeUpdate("DELETE FROM users WHERE userName = '" + u.getUserName() + "'");
+            }
+            finally {
+                if (stmt != null) { stmt.close(); }
+            }
+        }
+        catch (SQLException e) {
+            throw new Database.DatabaseException("delete User failed");
+        }
     }
 }
