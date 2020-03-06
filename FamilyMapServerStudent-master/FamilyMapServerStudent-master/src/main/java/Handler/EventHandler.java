@@ -19,8 +19,6 @@ public class EventHandler implements HttpHandler {
         EventIDResult myEventIDResponse = new EventIDResult();
         EventGetAllResult myEventGetAllResponse = new EventGetAllResult();
 
-        System.out.println(exchange.getRequestHeaders().keySet());
-        System.out.println(exchange.getRequestHeaders().values());
         try {
             if (exchange.getRequestMethod().toLowerCase().equals("get")) {
                 if(exchange.getRequestHeaders().containsKey("Authorization")){
