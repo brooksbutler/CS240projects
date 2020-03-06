@@ -77,8 +77,12 @@ class LoadServiceTest {
     }
 
     @AfterEach
-    public void tearDown() {
+    public void tearDown() throws Database.DatabaseException {
         myLoadService = null;
+        Database db = new Database();
+        db.openConnection();
+        db.resetTables();
+        db.closeConnection(true);
     }
 
     @Test

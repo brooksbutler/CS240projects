@@ -21,8 +21,16 @@ public class EventGetAllResult {
     }
 
     public void setData(EventIDResult[] input) {
-        data = new EventIDResult[input.length];
-        System.arraycopy(input, 0, data, 0, input.length);
+        if (input == null){
+            data = null;
+        }
+        else {
+            data = new EventIDResult[input.length];
+            for (int i = 0; i < input.length; i++) {
+                data[i] = input[i];
+            }
+        }
+//        System.arraycopy(input, 0, data, 0, input.length);
     }
 
     public boolean isSuccess() {

@@ -37,8 +37,12 @@ class FillServiceTest {
     }
 
     @AfterEach
-    public void tearDown() {
+    public void tearDown() throws Database.DatabaseException {
         myFillService = null;
+        Database db = new Database();
+        db.openConnection();
+        db.resetTables();
+        db.closeConnection(true);
     }
 
     @Test

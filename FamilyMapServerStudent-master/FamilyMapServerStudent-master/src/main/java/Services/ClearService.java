@@ -39,7 +39,7 @@ public class ClearService {
             try{
                 myDB.closeConnection(false);
             }catch (Database.DatabaseException d){
-                result.setMessage(d.getMessage());
+                result.setMessage("error");
                 return result;
             }
 

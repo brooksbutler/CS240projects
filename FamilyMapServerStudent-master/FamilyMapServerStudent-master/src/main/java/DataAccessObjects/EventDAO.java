@@ -99,6 +99,7 @@ public class EventDAO {
             rs = stmt.executeQuery();
             if (rs.next()) {
                 event.setEventID(rs.getString(1));
+                String username = rs.getString(2);
                 event.setUserName(rs.getString(2));
                 event.setPersonID(rs.getString(3));
                 event.setLatitude(rs.getDouble(4));
@@ -142,7 +143,7 @@ public class EventDAO {
                 rs = stmt.executeQuery();
 
                 if (!rs.next() ) {
-                    throw new Database.DatabaseException("no such eventID");
+                    throw new Database.DatabaseException("error: no such eventID");
                 } else {
                     return true;
                 }
@@ -157,7 +158,7 @@ public class EventDAO {
             }
         }
         catch (SQLException e) {
-            throw new Database.DatabaseException("no such eventID");
+            throw new Database.DatabaseException("error: no such eventID");
         }
     }
 
@@ -215,6 +216,27 @@ public class EventDAO {
         }
         catch (SQLException e) {
             throw new Database.DatabaseException("deleteAllEventsOfUser failed");
+        }
+    }
+
+    public void updateUserName(EventModel event, String userName) throws Database.DatabaseException{
+        try {
+            Statement stmt = null;
+            try {
+                String sql = "UPDATE events\n" +
+                        "SET userName = '" + userName + "' " +
+                        "WHERE eventID = '" + event.getEventID() + "'";
+                stmt = conn.createStatement();
+                stmt.executeUpdate(sql);
+            }
+            finally {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            }
+        }
+        catch (SQLException e) {
+            throw new Database.DatabaseException("error: update username failed");
         }
     }
 }

@@ -41,8 +41,12 @@ public class EventIDService {
                 AuthTokenModel auth = myAuthDAO.getAuthTokenModel(authToken);
                 if (myEventDAO.doesEventExist(eventId)){
                     EventModel event = myEventDAO.selectSingleEvent(eventId);
+//                    if(event.geUserName() == null && (auth.getPersonID().equals(event.getPersonID()))){
+//                        event.setUserName(auth.getUserName());
+//                        myEventDAO.updateUserName(event,auth.getUserName());
+//                    }
                     if (!event.geUserName().equals(auth.getUserName())){
-                        throw new Database.DatabaseException("Descendant of event and username of auth token do not match");
+                        throw new Database.DatabaseException("error: Descendant of event and username of auth token do not match");
                     }
                     myResult = new EventIDResult(event);
                 }

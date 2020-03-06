@@ -29,7 +29,7 @@ public class Decoder {
         return out;
     }
 
-    public static LoadRequest decodeLoadRequest(Reader json)  {
+    public static LoadRequest decodeLoadRequest(String json)  {
         LoadRequest out;
         Gson gson = new Gson();
 

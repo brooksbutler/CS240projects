@@ -69,7 +69,7 @@ public class AuthTokenDAO {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new Database.DatabaseException("Error encountered while inserting authToken into the database");
+            throw new Database.DatabaseException("error encountered while inserting authToken into the database");
         }
     }
     public AuthTokenModel getAuthTokenModel(String authToken) throws Database.DatabaseException {
@@ -87,7 +87,7 @@ public class AuthTokenDAO {
             }
         }catch (SQLException e) {
             e.printStackTrace();
-            throw new Database.DatabaseException("Error encountered while finding authToken");
+            throw new Database.DatabaseException("error encountered while finding authToken");
         } finally {
             if(rs != null) {
                 try {
@@ -116,7 +116,7 @@ public class AuthTokenDAO {
                 stmt = conn.prepareStatement(sql);
                 rs = stmt.executeQuery();
                 if (!rs.next() ) {
-                    throw new Database.DatabaseException("no such authToken");
+                    throw new Database.DatabaseException("error: no such authToken");
                 } else {
                     return true;
                 }
@@ -127,7 +127,31 @@ public class AuthTokenDAO {
             }
         }
         catch (SQLException e) {
-            throw new Database.DatabaseException("no such authToken");
+            throw new Database.DatabaseException("error: no such authToken");
+        }
+    }
+
+    public boolean doesPersonExist(String personID) throws Database.DatabaseException {
+        try {
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            try {
+                String sql = "select * from authTokens WHERE personID = '" + personID + "'";
+                stmt = conn.prepareStatement(sql);
+                rs = stmt.executeQuery();
+                if (!rs.next() ) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+            finally {
+                if (rs != null) { rs.close(); }
+                if (stmt != null) { stmt.close(); }
+            }
+        }
+        catch (SQLException e) {
+            return false;
         }
     }
 

@@ -5,7 +5,7 @@ import Model.PersonModel;
  * A Result object for getting a person
  */
 public class PersonIDResult {
-    private String userName;
+    private String associatedUsername;
     private String personID;
     private String firstName;
     private String lastName;
@@ -27,7 +27,7 @@ public class PersonIDResult {
      * @param p
      */
     public PersonIDResult(PersonModel p){
-        this.userName = p.getUserName();
+        this.associatedUsername = p.getUserName();
         this.personID = p.getPersonID();
         this.firstName = p.getFirstName();
         this.lastName = p.getLastName();
@@ -61,7 +61,7 @@ public class PersonIDResult {
         message = s;
     }
 
-    public void setUserName(String userName) { this.userName = userName; }
+    public void setUserName(String userName) { this.associatedUsername = userName; }
 
     public void setPersonID(String personID) { this.personID = personID; }
 
@@ -86,7 +86,7 @@ public class PersonIDResult {
         PersonIDResult secondPerson = (PersonIDResult) o;
 
         if (personID!= null && !personID.equals(secondPerson.personID)) { return false; }
-        if (userName!= null && !userName.equals(secondPerson.userName)) { return false; }
+        if (associatedUsername!= null && !associatedUsername.equals(secondPerson.associatedUsername)) { return false; }
         if (firstName != null && !firstName.equals(secondPerson.firstName)) { return false; }
         if (lastName != null && !lastName.equals(secondPerson.lastName)) { return false; }
         if (gender != null && !gender.equals(secondPerson.gender)) { return false; }

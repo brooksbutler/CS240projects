@@ -41,7 +41,7 @@ public class PersonDAO {
 
                 stmt.executeUpdate("drop table if exists persons");
                 stmt.executeUpdate("create table persons (personID VARCHAR(255) NOT NULL PRIMARY KEY,"+
-                        " userName VARCHAR(255) NOT NULL, firstName VARCHAR(255) NOT NULL, lastName VARCHAR(255) NOT NULL, " +
+                        " userName VARCHAR(255), firstName VARCHAR(255) NOT NULL, lastName VARCHAR(255) NOT NULL, " +
                         "gender CHAR(255) NOT NULL, fatherID VARCHAR(255), motherID VARCHAR(255), spouseID VARCHAR(255),"+
                         " CONSTRAINT person_info UNIQUE (personID))");
             }

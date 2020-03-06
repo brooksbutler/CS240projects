@@ -61,7 +61,7 @@ public class RegisterService {
 
         } catch (Database.DatabaseException e){
             result.setSuccess(false);
-            result.setMessage("User already exists failed");
+            result.setMessage("error: user already exists");
 
             try{
                 myDB.closeConnection(false);

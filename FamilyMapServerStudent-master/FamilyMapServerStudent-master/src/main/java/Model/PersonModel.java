@@ -6,7 +6,7 @@ package Model;
 public class PersonModel {
 
     private String personID;
-    private String userName;
+    private String associatedUsername;
     private String firstName;
     private String lastName;
     private String gender;
@@ -22,7 +22,7 @@ public class PersonModel {
 
     public PersonModel(String personID, String userName, String firstName, String lastName, String gender){
         this.personID = personID;
-        this.userName = userName;
+        this.associatedUsername = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -34,7 +34,7 @@ public class PersonModel {
      */
     public PersonModel(UserModel user){
         this.personID = user.getPersonID();
-        this.userName = user.getUserName();
+        this.associatedUsername = user.getUserName();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.gender = user.getGender();
@@ -49,11 +49,11 @@ public class PersonModel {
     }
 
     public String getUserName() {
-        return userName;
+        return associatedUsername;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.associatedUsername = userName;
     }
 
     public String getFirstName() {
@@ -113,7 +113,7 @@ public class PersonModel {
         PersonModel secondPerson = (PersonModel) o;
 
         if (!personID.equals(secondPerson.personID)) { return false; }
-        if (!userName.equals(secondPerson.userName)) { return false; }
+        if (!associatedUsername.equals(secondPerson.associatedUsername)) { return false; }
         if (!firstName.equals(secondPerson.firstName)) { return false; }
         if (!lastName.equals(secondPerson.lastName)) { return false; }
         if (!gender.equals(secondPerson.gender)) { return false; }

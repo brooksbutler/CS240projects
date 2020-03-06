@@ -24,11 +24,11 @@ public class PersonIDService {
 
     /**
      *
-     * @param personId
+     * @param personID
      * @param authToken
      * @return PersonIDResult object
      */
-    public PersonIDResult personID(String personId, String authToken){
+    public PersonIDResult personID(String personID, String authToken){
         PersonIDResult myResponse = new PersonIDResult();
 
         try{
@@ -38,11 +38,11 @@ public class PersonIDService {
 
             if(myAuthDAO.doesAuthTokenExist(authToken)){
                 AuthTokenModel auth = myAuthDAO.getAuthTokenModel(authToken);
-                if (!personId.equals(auth.getPersonID())){
-                    throw new Database.DatabaseException("PersonID does not match given authToken");
+                if (!personID.equals(auth.getPersonID())){
+                    throw new Database.DatabaseException("error: PersonID does not match given authToken");
                 }
-                if (myPersonDAO.doesPersonExist(personId)){
-                    PersonModel out = myPersonDAO.selectSinglePerson(personId);
+                if (myPersonDAO.doesPersonExist(personID)){
+                    PersonModel out = myPersonDAO.selectSinglePerson(personID);
                     myResponse = new PersonIDResult(out);
                 }
             }

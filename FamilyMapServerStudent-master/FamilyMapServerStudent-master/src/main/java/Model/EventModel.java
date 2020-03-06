@@ -5,7 +5,7 @@ package Model;
 public class EventModel {
 
     private String eventID;
-    private String userName;
+    private String associatedUsername;
     private String personID;
     private Double latitude;
     private Double longitude;
@@ -22,7 +22,7 @@ public class EventModel {
     public EventModel(String eventID, String userName, String personID, Double latitude, Double longitude,
                       String country,String city, String eventType, int year){
         this.eventID = eventID;
-        this.userName = userName;
+        this.associatedUsername = userName;
         this.personID = personID;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -41,11 +41,11 @@ public class EventModel {
     }
 
     public String geUserName() {
-        return userName;
+        return associatedUsername;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.associatedUsername = userName;
     }
 
     public String getPersonID() {
@@ -112,7 +112,7 @@ public class EventModel {
         EventModel secondEvent = (EventModel) o;
 
         if (!eventID.equals(secondEvent.eventID)) { return false; }
-        if (!userName.equals(secondEvent.userName)) { return false; }
+        if (!associatedUsername.equals(secondEvent.associatedUsername)) { return false; }
         if (!personID.equals(secondEvent.personID)) { return false; }
         if (!latitude.equals(secondEvent.latitude)) { return false; }
         if (!longitude.equals(secondEvent.longitude)) { return false; }

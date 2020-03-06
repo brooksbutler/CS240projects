@@ -28,8 +28,18 @@ public class PersonGetAllResult {
     }
 
     public void setData(PersonIDResult[] input) {
-        data = new PersonIDResult[input.length];
-        System.arraycopy(input, 0, data, 0, input.length);
+        if (input == null){
+            data = null;
+        }
+        else {
+            data = new PersonIDResult[input.length];
+            for (int i = 0; i < input.length; i++) {
+                data[i] = input[i];
+            }
+        }
+
+//        data = new PersonIDResult[input.length];
+//        System.arraycopy(input, 0, data, 0, input.length);
     }
 
     public boolean isSuccess() {

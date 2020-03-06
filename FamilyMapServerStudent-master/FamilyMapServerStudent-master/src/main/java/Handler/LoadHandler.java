@@ -2,11 +2,8 @@ package Handler;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
+
+import java.io.*;
 import java.net.HttpURLConnection;
 import ObjectCodeDecode.Decoder;
 import Services.LoadService;
@@ -22,7 +19,8 @@ public class LoadHandler implements HttpHandler {
                 LoadService myLoadService = new LoadService();
 
                 Reader reader = new InputStreamReader(exchange.getRequestBody());
-                LoadRequest myLoadRequest = Decoder.decodeLoadRequest(reader);
+                String readstring = readString(exchange.getRequestBody());
+                LoadRequest myLoadRequest = Decoder.decodeLoadRequest(readstring);
 
                 myLoadResult = myLoadService.load(myLoadRequest);
                 if (myLoadResult.isSuccess()){
@@ -56,5 +54,16 @@ public class LoadHandler implements HttpHandler {
         OutputStreamWriter sw = new OutputStreamWriter(os);
         sw.write(str);
         sw.flush();
+    }
+
+    private String readString(InputStream is) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        InputStreamReader sr = new InputStreamReader(is);
+        char[] buf = new char[1024];
+        int len;
+        while ((len = sr.read(buf)) > 0) {
+            sb.append(buf, 0, len);
+        }
+        return sb.toString();
     }
 }

@@ -14,12 +14,16 @@ class AuthTokenDAOTest {
 
     @BeforeEach
     public void setUp() throws Exception {
-        myAuthTokenDAO = new AuthTokenDAO();
-        db = new Database();
-        db.openConnection();
-        db.resetTables();
-        myAuthTokenDAO = db.getMyAuthTokenDAO();
-        bestAuthToken = new AuthTokenModel(UUID.randomUUID().toString(),"realUserName",UUID.randomUUID().toString());
+        try {
+            myAuthTokenDAO = new AuthTokenDAO();
+            db = new Database();
+            db.openConnection();
+            db.resetTables();
+            myAuthTokenDAO = db.getMyAuthTokenDAO();
+            bestAuthToken = new AuthTokenModel(UUID.randomUUID().toString(), "realUserName", UUID.randomUUID().toString());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @AfterEach

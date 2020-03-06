@@ -8,7 +8,7 @@ public class LoginResult {
 
     private String authToken;
     private String userName;
-    private String personId;
+    private String personID;
     private transient boolean success;
     private transient String message;
 
@@ -18,7 +18,7 @@ public class LoginResult {
     public LoginResult(){
         authToken = "";
         userName = "";
-        personId = "";
+        personID = "";
         success = false;
         message = "";
     }
@@ -30,7 +30,7 @@ public class LoginResult {
     public LoginResult(AuthTokenModel a){
         this.authToken = a.getAuthToken();
         this.userName = a.getUserName();
-        this.personId = a.getPersonID();
+        this.personID = a.getPersonID();
         success = true;
         message = "";
     }
@@ -58,14 +58,14 @@ public class LoginResult {
         this.userName = input;
     }
     public void setPersonId(String input){
-        this.personId = input;
+        this.personID = input;
     }
 
     public String getAuthToken(){
         return authToken;
     }
 
-    public String getPersonId(){return personId;}
+    public String getPersonId(){return personID;}
 
     @Override
     public boolean equals(Object o) {
@@ -77,7 +77,7 @@ public class LoginResult {
 
         if(!userName.equals(secondResponse.userName)){ return false; }
         if(!authToken.equals(secondResponse.authToken)){ return false; }
-        if(!personId.equals(secondResponse.personId)){ return false; }
+        if(!personID.equals(secondResponse.personID)){ return false; }
         if (success != secondResponse.success) { return false; }
         if (message == null && secondResponse.message != null) { return false; }
         if (message != null && secondResponse.message == null){ return false; }

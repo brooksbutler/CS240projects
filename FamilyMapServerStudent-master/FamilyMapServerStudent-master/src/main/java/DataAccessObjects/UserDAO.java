@@ -172,7 +172,7 @@ public class UserDAO {
                 stmt = conn.prepareStatement(sql);
                 rs = stmt.executeQuery();
                 if (!rs.next() ) {
-                    throw new Database.DatabaseException("no such username and/or password");
+                    throw new Database.DatabaseException("error: no such username and/or password");
                 } else {
                     return true;
                 }
@@ -183,7 +183,7 @@ public class UserDAO {
             }
         }
         catch (SQLException e) {
-            throw new Database.DatabaseException("no such username and/or password");
+            throw new Database.DatabaseException("error: no such username and/or password");
         }
     }
 

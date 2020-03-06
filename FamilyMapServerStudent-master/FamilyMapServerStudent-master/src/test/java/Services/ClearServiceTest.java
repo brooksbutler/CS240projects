@@ -69,6 +69,10 @@ public class ClearServiceTest {
     @AfterEach
     public void tearDown() throws Database.DatabaseException {
         myClearService = null;
+        Database db = new Database();
+        db.openConnection();
+        db.resetTables();
+        db.closeConnection(true);
     }
 
     @Test

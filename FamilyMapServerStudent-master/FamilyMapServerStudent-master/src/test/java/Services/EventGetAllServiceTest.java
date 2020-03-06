@@ -75,8 +75,12 @@ class EventGetAllServiceTest {
     }
 
     @AfterEach
-    public void tearDown() {
+    public void tearDown() throws Database.DatabaseException {
         myEventGetAllService = null;
+        Database db = new Database();
+        db.openConnection();
+        db.resetTables();
+        db.closeConnection(true);
     }
 
     @Test
@@ -97,7 +101,7 @@ class EventGetAllServiceTest {
     public void EventGetALlTest2() {
         EventGetAllResult expectedBadResponse = new EventGetAllResult();
         expectedBadResponse.setSuccess(false);
-        expectedBadResponse.setMessage("no such authToken");
+        expectedBadResponse.setMessage("error: no such authToken");
 
         EventGetAllResult badOutputresponse = myEventGetAllService.eventGetAll("bugos");
 

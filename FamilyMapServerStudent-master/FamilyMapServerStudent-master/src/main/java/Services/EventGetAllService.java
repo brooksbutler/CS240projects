@@ -108,7 +108,7 @@ public class EventGetAllService {
             }
         }
         catch (SQLException e) {
-            throw new Database.DatabaseException("Select all events failed");
+            throw new Database.DatabaseException("error: Select all events failed");
         }
         EventIDResult[] outFinal = new EventIDResult[outArray.size()];
         outFinal = outArray.toArray(outFinal);

@@ -77,7 +77,7 @@ public class FillService {
             PersonDAO myPersonDAO = myDB.getMyPersonDAO();
 
             if (!myUserDAO.doesUserNameExist(userName)){
-                throw new Database.DatabaseException("username does not exist");
+                throw new Database.DatabaseException("error: username does not exist");
             }
             UserModel user = myUserDAO.getUserModel(userName); //user does not have the same personID as the userName user
             user.setPersonID(UUID.randomUUID().toString());
@@ -252,16 +252,18 @@ public class FillService {
 
         r = rand.nextInt(977);
         randLocation = locationArray.getLocations()[r];
+        double mLat = randLocation.getLatitude();
+        double mLon = randLocation.getLongitude();
+        String mCountry = randLocation.getCountry();
+        String mCity = randLocation.getCity();
         EventModel motherMarraige = new EventModel(UUID.randomUUID().toString(),mother.getUserName(),
-                mother.getPersonID(),randLocation.getLatitude(),randLocation.getLongitude(),
-                randLocation.getCountry(),randLocation.getCity(),"Marriage",orphanBirthYear-2);
+                mother.getPersonID(), mLat, mLon, mCountry, mCity,"Marriage",orphanBirthYear-2);
         myEventDAO.insertEvent(motherMarraige); //inserted mother's death
 
         r = rand.nextInt(977);
         randLocation = locationArray.getLocations()[r];
         EventModel fatherMarraige = new EventModel(UUID.randomUUID().toString(),father.getUserName(),
-                father.getPersonID(),randLocation.getLatitude(),randLocation.getLongitude(),
-                randLocation.getCountry(),randLocation.getCity(),"Marriage",orphanBirthYear-2);
+                father.getPersonID(), mLat, mLon, mCountry, mCity,"Marriage",orphanBirthYear-2);
         myEventDAO.insertEvent(fatherMarraige);
 
         return parentsBirthDate;

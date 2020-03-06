@@ -73,8 +73,12 @@ class EventIDServiceTest {
     }
 
     @AfterEach
-    public void tearDown() {
+    public void tearDown() throws Database.DatabaseException {
         myEventIDService = null;
+        Database db = new Database();
+        db.openConnection();
+        db.resetTables();
+        db.closeConnection(true);
     }
 
 
@@ -92,7 +96,7 @@ class EventIDServiceTest {
     public void testEventID2(){
         EventIDResult badExpectedResult = new EventIDResult();
         badExpectedResult.setSuccess(false);
-        badExpectedResult.setMessage("Descendant of event and username of auth token do not match");
+        badExpectedResult.setMessage("error: Descendant of event and username of auth token do not match");
 
         EventIDResult badOutputResponse = myEventIDService.eventID(testEvent1.getEventID(), testAuth2.getAuthToken());
 

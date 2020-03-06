@@ -64,8 +64,12 @@ class PersonGetAllServiceTest {
     }
 
     @AfterEach
-    public void tearDown() {
+    public void tearDown() throws Database.DatabaseException {
         myPersonGetAllService = null;
+        Database db = new Database();
+        db.openConnection();
+        db.resetTables();
+        db.closeConnection(true);
     }
 
     @Test
@@ -87,7 +91,7 @@ class PersonGetAllServiceTest {
     public void testPersonGetAll2(){
         PersonGetAllResult badExpectedResponse = new PersonGetAllResult();
         badExpectedResponse.setSuccess(false);
-        badExpectedResponse.setMessage("no such authToken");
+        badExpectedResponse.setMessage("error: no such authToken");
 
         PersonGetAllResult badOutputResponse = myPersonGetAllService.personGetAll("bogus");
 

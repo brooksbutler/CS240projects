@@ -19,6 +19,8 @@ public class EventHandler implements HttpHandler {
         EventIDResult myEventIDResponse = new EventIDResult();
         EventGetAllResult myEventGetAllResponse = new EventGetAllResult();
 
+        System.out.println(exchange.getRequestHeaders().keySet());
+        System.out.println(exchange.getRequestHeaders().values());
         try {
             if (exchange.getRequestMethod().toLowerCase().equals("get")) {
                 if(exchange.getRequestHeaders().containsKey("Authorization")){
@@ -74,6 +76,7 @@ public class EventHandler implements HttpHandler {
                             writeString(jsonStr, respBody);
                             respBody.close();
                         } else {
+                            myEventGetAllResponse.setMessage(out.getMessage());
                             exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
                             String jsonStr = new String("{\"message\" : \"" + myEventGetAllResponse.getMessage() + "\"}");
                             OutputStream respBody = exchange.getResponseBody();

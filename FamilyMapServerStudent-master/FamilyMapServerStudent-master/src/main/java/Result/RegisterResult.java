@@ -7,7 +7,7 @@ import Model.AuthTokenModel;
 public class RegisterResult {
     private String authToken;
     private String userName;
-    private String personId;
+    private String personID;
     private transient boolean success;
     private transient String message;
 
@@ -18,7 +18,7 @@ public class RegisterResult {
         success = false;
         authToken = "";
         userName = "";
-        personId = "";
+        personID = "";
     }
 
     /**
@@ -28,7 +28,7 @@ public class RegisterResult {
     public RegisterResult(AuthTokenModel a){
         authToken = a.getAuthToken();
         userName = a.getUserName();
-        personId = a.getPersonID();
+        personID = a.getPersonID();
     }
 
     public void setAuthToken(String intput){
@@ -40,7 +40,7 @@ public class RegisterResult {
     }
 
     public void setPersonId(String input){
-        this.personId = input;
+        this.personID = input;
     }
 
     public void setSuccess(boolean b){
@@ -64,7 +64,7 @@ public class RegisterResult {
     }
 
     public String getPersonID(){
-        return personId;
+        return personID;
     }
 
     @Override
@@ -77,7 +77,7 @@ public class RegisterResult {
 
         if(!authToken.equals(secondResult.authToken)){ return false; }
         if(!userName.equals(secondResult.userName)){ return false; }
-        if(!personId.equals(secondResult.personId)){ return false; }
+        if(!personID.equals(secondResult.personID)){ return false; }
         if(success != secondResult.success) { return false; }
         if(message == null && secondResult.message != null) { return false; }
         if (message != null && secondResult.message == null){ return false; }

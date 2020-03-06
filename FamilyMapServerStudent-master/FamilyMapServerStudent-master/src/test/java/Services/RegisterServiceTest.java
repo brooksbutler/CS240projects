@@ -36,8 +36,12 @@ class RegisterServiceTest {
     }
 
     @AfterEach
-    public void tearDown() {
+    public void tearDown() throws Database.DatabaseException {
         myRegisterService = null;
+        Database db = new Database();
+        db.openConnection();
+        db.resetTables();
+        db.closeConnection(true);
     }
 
     @Test
@@ -71,7 +75,7 @@ class RegisterServiceTest {
 
         RegisterResult badExpectedResult = new RegisterResult();
         badExpectedResult.setSuccess(false);
-        badExpectedResult.setMessage("User already exists failed");
+        badExpectedResult.setMessage("error: user already exists");
 
         RegisterResult badOutputResult = myRegisterService.register(inputRequest);
         assertEquals(badExpectedResult, badOutputResult);

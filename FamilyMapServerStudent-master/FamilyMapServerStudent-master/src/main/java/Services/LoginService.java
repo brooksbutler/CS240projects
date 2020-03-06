@@ -40,8 +40,10 @@ public class LoginService {
             if (myUserDAO.doUsernameAndPasswordExist(user)) { //yes, the username and password are valid
                 AuthTokenModel returnAuth = new AuthTokenModel(user);
                 returnAuth.setPersonID(myUserDAO.getPersonIDOfUser(user)); // will fill in the personID of the user
+                if(!myAuthDAO.doesPersonExist(returnAuth.getPersonID())){
+                    myAuthDAO.insertToken(returnAuth);
+                }
 
-                myAuthDAO.insertToken(returnAuth);
 
                 loginResponse = new LoginResult(returnAuth);
                 loginResponse.setSuccess(true);

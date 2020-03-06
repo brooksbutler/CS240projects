@@ -104,7 +104,7 @@ public class PersonGetAllService {
             }
         }
         catch (SQLException e) {
-            throw new Database.DatabaseException("selectAllPersons failed");
+            throw new Database.DatabaseException("error: selectAllPersons failed");
         }
         PersonIDResult[] outFinal = new PersonIDResult[out.size()];
         outFinal = out.toArray(outFinal);

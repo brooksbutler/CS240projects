@@ -5,7 +5,7 @@ import Model.EventModel;
  * A Result object for getting an event ID
  */
 public class EventIDResult {
-    private String userName;
+    private String associatedUsername;
     private String eventID;
     private String personID;
     private Double latitude;
@@ -29,7 +29,7 @@ public class EventIDResult {
      * @param e
      */
     public EventIDResult(EventModel e){
-        this.userName = e.geUserName();
+        this.associatedUsername = e.geUserName();
         this.eventID = e.getEventID();
         this.personID = e.getPersonID();
         this.latitude = e.getLatitude();
@@ -56,7 +56,7 @@ public class EventIDResult {
         return message;
     }
 
-    public void setUserName(String userName) { this.userName = userName; }
+    public void setUserName(String userName) { this.associatedUsername = userName; }
 
     public void setEventID(String eventID) { this.eventID = eventID; }
 
@@ -83,7 +83,7 @@ public class EventIDResult {
         EventIDResult secondResponse = (EventIDResult) o;
 
         if (eventID!= null && !eventID.equals(secondResponse.eventID)) { return false; }
-        if (userName != null && !userName.equals(secondResponse.userName)) { return false; }
+        if (associatedUsername != null && !associatedUsername.equals(secondResponse.associatedUsername)) { return false; }
         if (personID != null && !personID.equals(secondResponse.personID)) { return false; }
         if (latitude != null && !latitude.equals(secondResponse.latitude)) { return false; }
         if (longitude != null && !longitude.equals(secondResponse.longitude)) { return false; }

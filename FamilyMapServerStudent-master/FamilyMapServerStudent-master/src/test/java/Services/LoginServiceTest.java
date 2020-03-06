@@ -36,8 +36,12 @@ class LoginServiceTest {
     }
 
     @AfterEach
-    public void tearDown() {
+    public void tearDown() throws Database.DatabaseException {
         myLoginService = null;
+        Database db = new Database();
+        db.openConnection();
+        db.resetTables();
+        db.closeConnection(true);
     }
 
     @Test
@@ -62,7 +66,7 @@ class LoginServiceTest {
         LoginRequest inputRequest = new LoginRequest();
         LoginResult badExpectedResult = new LoginResult();
         badExpectedResult.setSuccess(false);
-        badExpectedResult.setMessage("no such username and/or password");
+        badExpectedResult.setMessage("error: no such username and/or password");
 
         inputRequest.setUserName("Bogus");
         LoginResult badOutputResponse = myLoginService.login(inputRequest);

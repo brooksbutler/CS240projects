@@ -64,8 +64,12 @@ class PersonIDServiceTest {
     }
 
     @AfterEach
-    public void tearDown() {
+    public void tearDown() throws Database.DatabaseException {
         myPersonIDService = null;
+        Database db = new Database();
+        db.openConnection();
+        db.resetTables();
+        db.closeConnection(true);
     }
 
     @Test
@@ -82,7 +86,7 @@ class PersonIDServiceTest {
     public void testPersonID2(){
         PersonIDResult badExpectedResult = new PersonIDResult();
         badExpectedResult.setSuccess(false);
-        badExpectedResult.setMessage("PersonID does not match given authToken");
+        badExpectedResult.setMessage("error: PersonID does not match given authToken");
 
         PersonIDResult badOutputResult = myPersonIDService.personID(testPerson1.getPersonID(), testAuth2.getAuthToken());
 
