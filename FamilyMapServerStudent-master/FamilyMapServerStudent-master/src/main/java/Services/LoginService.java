@@ -43,6 +43,9 @@ public class LoginService {
                 if(!myAuthDAO.doesPersonExist(returnAuth.getPersonID())){
                     myAuthDAO.insertToken(returnAuth);
                 }
+                else {
+                    myAuthDAO.updateAuthToken(returnAuth,returnAuth.getAuthToken());
+                }
 
 
                 loginResponse = new LoginResult(returnAuth);

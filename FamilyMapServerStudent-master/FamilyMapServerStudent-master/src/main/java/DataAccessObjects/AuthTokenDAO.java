@@ -2,6 +2,7 @@ package DataAccessObjects;
 
 import Model.AuthTokenModel;
 import Model.EventModel;
+import Model.PersonModel;
 
 import java.sql.*;
 
@@ -185,5 +186,24 @@ public class AuthTokenDAO {
             throw new Database.DatabaseException("seeTable auth failed");
         }
         return out.toString();
+    }
+
+    public void updateAuthToken(AuthTokenModel a, String authToken) throws Database.DatabaseException{
+        try {
+            Statement stmt = null;
+            try {
+                String sql = "UPDATE authTokens\n" +
+                        "SET authToken = '" + authToken + "' " +
+                        "WHERE userName = '" + a.getUserName() + "'";
+                stmt = conn.createStatement();
+                stmt.executeUpdate(sql);
+            }
+            finally {
+                if (stmt != null) { stmt.close(); }
+            }
+        }
+        catch (SQLException e) {
+            throw new Database.DatabaseException("update authToken failed");
+        }
     }
 }

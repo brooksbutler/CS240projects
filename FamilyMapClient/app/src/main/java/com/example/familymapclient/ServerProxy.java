@@ -41,7 +41,7 @@ public class ServerProxy {
 
             connection.connect();
 
-            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK){
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 Reader reader = new InputStreamReader(connection.getInputStream());
                 LoginResult out = Decoder.decodeLoginResult(reader);
                 out.setSuccess(true);
@@ -53,20 +53,18 @@ public class ServerProxy {
                 out.setMessage(connection.getResponseMessage());
                 return out;
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Log.e("HttpClient", e.getMessage(), e);
         }
         return null;
     }
 
-    public RegisterResult getRegisterUrl(URL url, RegisterRequest request){
+    public RegisterResult getRegisterUrl(URL url, RegisterRequest request) {
         try {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
             connection.addRequestProperty("Accept", "application/json");
-
 
             String json = Encoder.encode(request);
 
@@ -76,7 +74,7 @@ public class ServerProxy {
 
             connection.connect();
 
-            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK){
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 Reader reader = new InputStreamReader(connection.getInputStream());
                 RegisterResult out = Decoder.decodeRegisterResult(reader);
                 out.setSuccess(true);
@@ -88,15 +86,14 @@ public class ServerProxy {
                 out.setMessage(connection.getResponseMessage());
                 return out;
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Log.e("HttpClient", e.getMessage(), e);
         }
         return null;
 
     }
 
-    public EventGetAllResult getAllEventsUrl(URL url, String auth){
+    public EventGetAllResult getAllEventsUrl(URL url, String auth) {
         try {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
@@ -105,7 +102,7 @@ public class ServerProxy {
             connection.addRequestProperty("Accept", "application/json");
             connection.connect();
 
-            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK){
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 Reader reader = new InputStreamReader(connection.getInputStream());
                 EventGetAllResult out = Decoder.decodeEventGetAllResult(reader);
                 out.setSuccess(true);
@@ -118,7 +115,7 @@ public class ServerProxy {
                 return out;
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.e("Httpclient", e.getMessage(), e);
             EventGetAllResult badResponse = new EventGetAllResult();
             badResponse.setMessage("Bad Request");
@@ -127,7 +124,7 @@ public class ServerProxy {
         }
     }
 
-    public PersonGetAllResult getAllPeopleUrl(URL url, String auth){
+    public PersonGetAllResult getAllPeopleUrl(URL url, String auth) {
         try {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
@@ -136,7 +133,7 @@ public class ServerProxy {
             connection.addRequestProperty("Accept", "application/json");
             connection.connect();
 
-            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK){
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 Reader reader = new InputStreamReader(connection.getInputStream());
                 PersonGetAllResult out = Decoder.decodePersonGetAllResult(reader);
                 out.setSuccess(true);
@@ -150,22 +147,27 @@ public class ServerProxy {
                 return out;
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.e("Httpclient", e.getMessage(), e);
         }
         return null;
     }
 
-    public PersonIDResult getPersonURL(URL url, String auth){
+    public PersonIDResult getPersonURL(URL url, String auth) {
         try {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setDoOutput(false);
             connection.addRequestProperty("Authorization", auth);
             connection.addRequestProperty("Accept", "application/json");
-            connection.connect();
+            try{
+                connection.connect();
+            }catch (Exception e){
+                throw e;
+            }
 
-            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK){
+
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 Reader reader = new InputStreamReader(connection.getInputStream());
                 PersonIDResult out = Decoder.decodePersonIDResult(reader);
                 out.setSuccess(true);
@@ -178,7 +180,7 @@ public class ServerProxy {
                 return out;
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.e("Httpclient", e.getMessage(), e);
         }
         return null;

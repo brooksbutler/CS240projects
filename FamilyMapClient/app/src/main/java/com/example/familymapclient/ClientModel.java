@@ -11,21 +11,24 @@ import java.util.Set;
 import Model.EventModel;
 import Model.PersonModel;
 
+import Result.PersonIDResult;
+import Result.EventIDResult;
+
 public class ClientModel {
 
     private static ClientModel myObj;
 
-    private Map<String, EventModel> eventMap;
-    private Map<String,PersonModel> peopleMap;
-    private Map<String, List<EventModel>> peopleEventMap;
-    private PersonModel user;
-    private Set<PersonModel> paternalAncestors;
-    private Set<PersonModel> maternalAncestors;
+    private Map<String, EventIDResult> eventMap;
+    private Map<String,PersonIDResult> peopleMap;
+    private Map<String, List<EventIDResult>> peopleEventMap;
+    private PersonIDResult user;
+    private Set<PersonIDResult> paternalAncestors;
+    private Set<PersonIDResult> maternalAncestors;
     private List<String> eventTypesForUser;
     private List<String> eventTypesForFemaleAncestors;
     private List<String> eventTypesForMaleAncestors;
     private List<String> allEventTypes;
-    private Map<String, List<PersonModel>> childrenMap;
+    private Map<String, List<PersonIDResult>> childrenMap;
     private String authToken;
     private boolean loggedIn = false;
     private boolean showFemaleEvents = true;
@@ -41,7 +44,7 @@ public class ClientModel {
         peopleMap = new HashMap<>();
         peopleEventMap = new HashMap<>();
         eventMap = new HashMap<>();
-        user = new PersonModel();
+        user = new PersonIDResult();
         paternalAncestors = new HashSet<>();
         maternalAncestors = new HashSet<>();
         eventTypesForUser= new ArrayList<>();
@@ -62,7 +65,7 @@ public class ClientModel {
         return myObj;
     }
 
-    public void setPeople(PersonModel[] input) {
+    public void setPeople(PersonIDResult[] input) {
         user = input[0];
 
         for (int i = 0; i < input.length; i++){
@@ -73,19 +76,19 @@ public class ClientModel {
     }
 
     public void createPaternalAndMaternalSets(){
-        PersonModel motherOfUser = peopleMap.get(user.getMotherID());
-        PersonModel fatherOfUser = peopleMap.get(user.getFatherID());
+        PersonIDResult motherOfUser = peopleMap.get(user.getMotherID());
+        PersonIDResult fatherOfUser = peopleMap.get(user.getFatherID());
 
 
         addParentsToOneSetOrTheOther(motherOfUser,true);
         addParentsToOneSetOrTheOther(fatherOfUser,false);
 
 
-        for (Map.Entry<String, PersonModel> entry : peopleMap.entrySet()) {
+        for (Map.Entry<String, PersonIDResult> entry : peopleMap.entrySet()) {
             String possibleParentPersonID = new String(entry.getValue().getPersonID());
-            List<PersonModel> childrenOfPossible = new ArrayList<>();
+            List<PersonIDResult> childrenOfPossible = new ArrayList<>();
 
-            for(Map.Entry<String, PersonModel> entryTwo : peopleMap.entrySet()){
+            for(Map.Entry<String, PersonIDResult> entryTwo : peopleMap.entrySet()){
                 if (possibleParentPersonID.equals(entryTwo.getValue().getFatherID()) || possibleParentPersonID.equals(entryTwo.getValue().getMotherID())){
                     childrenOfPossible.add(entryTwo.getValue());
                 }
@@ -94,7 +97,7 @@ public class ClientModel {
         }
     }
 
-    private void addParentsToOneSetOrTheOther(PersonModel personReceived, Boolean isMaternalSide){
+    private void addParentsToOneSetOrTheOther(PersonIDResult personReceived, Boolean isMaternalSide){
         if (isMaternalSide){
             maternalAncestors.add(personReceived);
         } else {
@@ -105,20 +108,20 @@ public class ClientModel {
             return;
         } else {
             if (isMaternalSide){
-                PersonModel motherOfPersonReceived = peopleMap.get(personReceived.getMotherID());
-                PersonModel fatherOfPersonReceived = peopleMap.get(personReceived.getFatherID());
+                PersonIDResult motherOfPersonReceived = peopleMap.get(personReceived.getMotherID());
+                PersonIDResult fatherOfPersonReceived = peopleMap.get(personReceived.getFatherID());
                 addParentsToOneSetOrTheOther(motherOfPersonReceived, true); //true indicates this person belongs to maternal set
                 addParentsToOneSetOrTheOther(fatherOfPersonReceived, true);
             } else {
-                PersonModel motherOfPersonReceived = peopleMap.get(personReceived.getMotherID());
-                PersonModel fatherOfPersonReceived = peopleMap.get(personReceived.getFatherID());
+                PersonIDResult motherOfPersonReceived = peopleMap.get(personReceived.getMotherID());
+                PersonIDResult fatherOfPersonReceived = peopleMap.get(personReceived.getFatherID());
                 addParentsToOneSetOrTheOther(motherOfPersonReceived,false);
                 addParentsToOneSetOrTheOther(fatherOfPersonReceived,false);
             }
         }
     }
 
-    public void setEvents(EventModel[] input){
+    public void setEvents(EventIDResult[] input){
 
         for (int i = 0; i < input.length; i++){
 
@@ -126,7 +129,7 @@ public class ClientModel {
 
             if (peopleEventMap.containsKey(input[i].getPersonID())){ //we know that the List<EventModel> associated with the person exists
                 //lets get it
-                List<EventModel> eventListFromMap = peopleEventMap.get(input[i].getPersonID());
+                List<EventIDResult> eventListFromMap = peopleEventMap.get(input[i].getPersonID());
 
                 if (input[i].getYear() < eventListFromMap.get(0).getYear()){
 
@@ -143,7 +146,7 @@ public class ClientModel {
                 peopleEventMap.put(input[i].getPersonID(), eventListFromMap);
             }
             else { // The list<EventModel> doesn't exist so this event is the first one associated with the person
-                List<EventModel> in = new ArrayList<>();
+                List<EventIDResult> in = new ArrayList<>();
                 in.add(input[i]);
                 peopleEventMap.put(input[i].getPersonID(), in);
             }
@@ -158,7 +161,7 @@ public class ClientModel {
         Boolean handledFemaleCase = false;
         Boolean handledUserCase = false;
 
-        for (Map.Entry<String, List<EventModel>> entry: peopleEventMap.entrySet()){
+        for (Map.Entry<String, List<EventIDResult>> entry: peopleEventMap.entrySet()){
             if (handledFemaleCase && handledMaleCase && handledUserCase) {
                 break;
             } else if(entry.getKey().equals(user.getPersonID())){
@@ -181,12 +184,12 @@ public class ClientModel {
         }
     }
 
-    public List<PersonModel> findParentsByPersonID(PersonModel potentialChild){
-        List<PersonModel> parents = new ArrayList<>();
+    public List<PersonIDResult> findParentsByPersonID(PersonIDResult potentialChild){
+        List<PersonIDResult> parents = new ArrayList<>();
 
-        for (Map.Entry<String, List<PersonModel>> entryTwo: childrenMap.entrySet()){
+        for (Map.Entry<String, List<PersonIDResult>> entryTwo: childrenMap.entrySet()){
             String possibleParent = new String(entryTwo.getKey());
-            List<PersonModel> children = entryTwo.getValue();
+            List<PersonIDResult> children = entryTwo.getValue();
 
             for (int i = 0; i < children.size(); i++){
                 if (potentialChild.getPersonID().equals(children.get(i).getPersonID())){
@@ -197,10 +200,10 @@ public class ClientModel {
         return parents;
     }
 
-    public PersonModel findSpouseByPersonID(PersonModel potentialSpouse){
-        PersonModel foundSpouse = new PersonModel();
+    public PersonIDResult findSpouseByPersonID(PersonIDResult potentialSpouse){
+        PersonIDResult foundSpouse = new PersonIDResult();
 
-        for (Map.Entry<String, PersonModel> entry: peopleMap.entrySet()){
+        for (Map.Entry<String, PersonIDResult> entry: peopleMap.entrySet()){
             if (entry.getValue().getSpouseID().equals(potentialSpouse.getPersonID())){
                 return entry.getValue();
             }
@@ -209,23 +212,23 @@ public class ClientModel {
     }
 
 
-    public Map<String,PersonModel> getPeopleMap(){ return peopleMap; }
+    public Map<String,PersonIDResult> getPeopleMap(){ return peopleMap; }
 
-    public PersonModel getPersonById(String id){ return peopleMap.get(id); }
+    public PersonIDResult getPersonById(String id){ return peopleMap.get(id); }
 
-    public Map<String, List<EventModel>> getPeopleEventMap() { return peopleEventMap; }
+    public Map<String, List<EventIDResult>> getPeopleEventMap() { return peopleEventMap; }
 
-    public Map<String, EventModel> getEventMap(){ return eventMap; }
+    public Map<String, EventIDResult> getEventMap(){ return eventMap; }
 
-    public List<EventModel> getEventsOfPersonByPersonId(String id){ return peopleEventMap.get(id); }
+    public List<EventIDResult> getEventsOfPersonByPersonId(String id){ return peopleEventMap.get(id); }
 
-    public EventModel getEventById(String id){ return eventMap.get(id); }
+    public EventIDResult getEventById(String id){ return eventMap.get(id); }
 
-    public PersonModel getUser(){ return user; }
+    public PersonIDResult getUser(){ return user; }
 
-    public Set<PersonModel> getMaternalAncestors(){ return maternalAncestors; }
+    public Set<PersonIDResult> getMaternalAncestors(){ return maternalAncestors; }
 
-    public Set<PersonModel> getPaternalAncestors(){ return paternalAncestors; }
+    public Set<PersonIDResult> getPaternalAncestors(){ return paternalAncestors; }
 
     public List<String> getEventTypesForUser() { return eventTypesForUser; }
 
@@ -233,19 +236,19 @@ public class ClientModel {
 
     public List<String> getEventTypesForMaleAncestors() { return eventTypesForMaleAncestors; }
 
-    public Map<String, List<PersonModel>> getChildrenMap(){ return childrenMap; }
+    public Map<String, List<PersonIDResult>> getChildrenMap(){ return childrenMap; }
 
-    public void setEventMap(Map<String, EventModel> eventMap) { this.eventMap = eventMap; }
+    public void setEventMap(Map<String, EventIDResult> eventMap) { this.eventMap = eventMap; }
 
-    public void setPeopleMap(Map<String, PersonModel> peopleMap) { this.peopleMap = peopleMap; }
+    public void setPeopleMap(Map<String, PersonIDResult> peopleMap) { this.peopleMap = peopleMap; }
 
-    public void setPeopleEventMap(Map<String, List<EventModel>> peopleEventMap) { this.peopleEventMap = peopleEventMap; }
+    public void setPeopleEventMap(Map<String, List<EventIDResult>> peopleEventMap) { this.peopleEventMap = peopleEventMap; }
 
-    public void setUser(PersonModel user) { this.user = user; }
+    public void setUser(PersonIDResult user) { this.user = user; }
 
-    public void setPaternalAncestors(Set<PersonModel> paternalAncestors) { this.paternalAncestors = paternalAncestors; }
+    public void setPaternalAncestors(Set<PersonIDResult> paternalAncestors) { this.paternalAncestors = paternalAncestors; }
 
-    public void setMaternalAncestors(Set<PersonModel> maternalAncestors) { this.maternalAncestors = maternalAncestors; }
+    public void setMaternalAncestors(Set<PersonIDResult> maternalAncestors) { this.maternalAncestors = maternalAncestors; }
 
     public void setEventTypesForUser(List<String> eventTypesForUser) { this.eventTypesForUser = eventTypesForUser; }
 
@@ -253,7 +256,7 @@ public class ClientModel {
 
     public void setEventTypesForMaleAncestors(List<String> eventTypesForMaleAncestors) { this.eventTypesForMaleAncestors = eventTypesForMaleAncestors; }
 
-    public void setChildrenMap(Map<String, List<PersonModel>> childrenMap) { this.childrenMap = childrenMap; }
+    public void setChildrenMap(Map<String, List<PersonIDResult>> childrenMap) { this.childrenMap = childrenMap; }
 
     public String getAuthToken() { return authToken; }
 

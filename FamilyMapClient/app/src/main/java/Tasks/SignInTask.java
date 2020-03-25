@@ -46,19 +46,19 @@ public class SignInTask extends AsyncTask<LoginRequest, Void, LoginResult> {
         }
     }
 
-    protected void onPostExecute(LoginResult response) {
+    protected void onPostExecute(LoginResult result) {
         if(android.os.Debug.isDebuggerConnected())
             android.os.Debug.waitForDebugger();
 
         if (answer.getSuccess()){
-            String url = new String("http://" + myRequest.getServerHost() + ":" + myRequest.getServerPort() + "/person/" + response.getPersonId());
+            String url = new String("http://" + myRequest.getServerHost() + ":" + myRequest.getServerPort() + "/person/" + result.getPersonId());
+            GetPersonTask personTask = new GetPersonTask(myFrag, myMainActivity,myRequest, result);
+            personTask.execute(url, result.getAuthToken());
 
         } else {
             Toast.makeText(myFrag.getContext(),
                     R.string.loginNotSuccessful,
                     Toast.LENGTH_SHORT).show();
         }
-
     }
-
 }

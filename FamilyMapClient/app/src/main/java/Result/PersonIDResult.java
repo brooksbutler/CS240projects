@@ -37,6 +37,18 @@ public class PersonIDResult {
         this.spouseID = p.getSpouseID();
     }
 
+    public String getAssociatedUsername() { return associatedUsername; }
+
+    public String getPersonID() { return personID; }
+
+    public String getGender() { return gender; }
+
+    public String getFatherID() { return fatherID; }
+
+    public String getMotherID() { return motherID; }
+
+    public String getSpouseID() { return spouseID; }
+
     public void setSuccess(boolean b){
         success = b;
     }

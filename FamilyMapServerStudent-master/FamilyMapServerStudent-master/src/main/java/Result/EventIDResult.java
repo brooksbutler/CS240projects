@@ -40,6 +40,24 @@ public class EventIDResult {
         this.year = e.getYear();
     }
 
+    public String getAssociatedUsername() { return associatedUsername; }
+
+    public String getEventID() { return eventID; }
+
+    public String getPersonID() { return personID; }
+
+    public Double getLatitude() { return latitude; }
+
+    public Double getLongitude() { return longitude; }
+
+    public String getCountry() { return country; }
+
+    public String getCity() { return city; }
+
+    public String getEventType() { return eventType; }
+
+    public int getYear() { return year; }
+
     public void setSuccess(boolean b){
         success = b;
     }

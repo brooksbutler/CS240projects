@@ -43,12 +43,6 @@ public class RegisterTask extends AsyncTask<RegisterRequest, Void, RegisterResul
             URL urla = new URL("http://" + myRegisterRequests[0].getServerHost() + ":" + myRegisterRequests[0].getServerPort() + "/user/register");
             answer = myServerProxy.getRegisterUrl(urla, myRegisterRequests[0]);
 
-/*
-            String url = new String ("http://" + taskRequest.getServerHost() + ":" + taskRequest.getServerPort() + "/person/");
-            GetPeopleTask peopleTast = new GetPeopleTask(fragActivity);
-            fragActivity.getActivity().runOnUiThread(new Runnable);
-*/
-
             return answer;
 
         } catch (MalformedURLException e){
@@ -58,15 +52,17 @@ public class RegisterTask extends AsyncTask<RegisterRequest, Void, RegisterResul
         }
     }
 
-    protected void onPostExecute(RegisterResult response) {
+    protected void onPostExecute(RegisterResult result) {
         if(android.os.Debug.isDebuggerConnected())
             android.os.Debug.waitForDebugger();
 
-        if (response.getSuccess()){ //was a successful register
+        if (result.getSuccess()){ //was a successful register
 
             String url = new String ("http://" + taskRequest.getServerHost() + ":" + taskRequest.getServerPort() + "/person/");
             String stringForToastIfSuccessful = new String("Register Success!" + "\n" + taskRequest.getFirstName() + "\n" + taskRequest.getLastName());
 
+            GetPeopleTask peopleTask = new GetPeopleTask(fragActivity, taskRequest, result, myMainActivity,stringForToastIfSuccessful);
+            peopleTask.execute(url, result.getAuthToken());
 
         } else { //was not a successful register
             //display failed register toast

@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager fm = getSupportFragmentManager();
         Fragment loginFrag = fm.findFragmentById(R.id.firstLayout);
-        Fragment mapFrag = fm.findFragmentById(R.id.firstLayout);
 
         if (!ClientModel.getInstance().isLoggedIn()){
             if (loginFrag == null) {
