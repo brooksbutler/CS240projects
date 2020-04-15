@@ -69,8 +69,8 @@ public class PersonActivity extends AppCompatActivity {
     void updateUI() {
         List<EventIDResult> eventsOfPerson = ClientModel.getInstance().getEventsOfPersonByPersonId(selectedPersonID);
         PersonIDResult person = ClientModel.getInstance().getPersonById(selectedPersonID);
-        List<DisplayRow> eventRows = new ArrayList<>();
-        List<DisplayRow> peopleRows = new ArrayList<>();
+        List<ShowRow> eventRows = new ArrayList<>();
+        List<ShowRow> peopleRows = new ArrayList<>();
 
 
         List<PersonIDResult> personsChildren = new ArrayList<>();
@@ -87,10 +87,10 @@ public class PersonActivity extends AppCompatActivity {
         if (personsParents.size() != 0){
             for (int i = 0; i < personsParents.size(); i++){
                 if (personsParents.get(i).getGender().equals("f")){
-                    DisplayRow temp = new DisplayRow(personsParents.get(i).getDescription(),"Mother", "female", personsParents.get(i).getPersonID());
+                    ShowRow temp = new ShowRow(personsParents.get(i).getDescription(),"Mother", "female", personsParents.get(i).getPersonID());
                     peopleRows.add(temp);
                 } else {
-                    DisplayRow temp = new DisplayRow(personsParents.get(i).getDescription(),"Father", "male", personsParents.get(i).getPersonID());
+                    ShowRow temp = new ShowRow(personsParents.get(i).getDescription(),"Father", "male", personsParents.get(i).getPersonID());
                     peopleRows.add(temp);
                 }
 
@@ -100,10 +100,10 @@ public class PersonActivity extends AppCompatActivity {
         if (personsChildren.size() != 0){
             for (int i = 0; i < personsChildren.size(); i++){
                 if (personsChildren.get(i).getGender().equals("f")){
-                    DisplayRow temp = new DisplayRow(personsChildren.get(i).getDescription(), "Daughter", "female", personsChildren.get(i).getPersonID());
+                    ShowRow temp = new ShowRow(personsChildren.get(i).getDescription(), "Daughter", "female", personsChildren.get(i).getPersonID());
                     peopleRows.add(temp);
                 } else {
-                    DisplayRow temp = new DisplayRow(personsChildren.get(i).getDescription(), "Son", "male", personsChildren.get(i).getPersonID());
+                    ShowRow temp = new ShowRow(personsChildren.get(i).getDescription(), "Son", "male", personsChildren.get(i).getPersonID());
                     peopleRows.add(temp);
                 }
             }
@@ -111,16 +111,16 @@ public class PersonActivity extends AppCompatActivity {
 
         if (spouse.getPersonID() != null && !spouse.getPersonID().equals("")){
             if (spouse.getGender().equals("f")){
-                DisplayRow temp = new DisplayRow(spouse.getDescription(), "Wife", "female", spouse.getPersonID());
+                ShowRow temp = new ShowRow(spouse.getDescription(), "Wife", "female", spouse.getPersonID());
                 peopleRows.add(temp);
             } else {
-                DisplayRow temp = new DisplayRow(spouse.getDescription(), "Husband", "Male", spouse.getPersonID());
+                ShowRow temp = new ShowRow(spouse.getDescription(), "Husband", "Male", spouse.getPersonID());
                 peopleRows.add(temp);
             }
         }
 
         for (int i = 0; i < eventsOfPerson.size(); i++){
-            DisplayRow temp = new DisplayRow(eventsOfPerson.get(i).getDescription(), person.getDescription(), "event", eventsOfPerson.get(i).getEventID());
+            ShowRow temp = new ShowRow(eventsOfPerson.get(i).getDescription(), person.getDescription(), "event", eventsOfPerson.get(i).getEventID());
             eventRows.add(temp);
         }
 
@@ -148,17 +148,17 @@ public class PersonActivity extends AppCompatActivity {
 
     }
 
-    class Group implements Parent<DisplayRow> {
+    class Group implements Parent<ShowRow> {
         String name;
-        List<DisplayRow> rows;
+        List<ShowRow> rows;
 
-        Group(String name, List<DisplayRow> rows){
+        Group(String name, List<ShowRow> rows){
             this.name = name;
             this.rows = rows;
         }
 
         @Override
-        public List<DisplayRow> getChildList() {
+        public List<ShowRow> getChildList() {
 
             return rows;
         }
@@ -169,7 +169,7 @@ public class PersonActivity extends AppCompatActivity {
 
     }
 
-    class Adapter extends ExpandableRecyclerAdapter<Group, DisplayRow, GroupHolder, Holder> {
+    class Adapter extends ExpandableRecyclerAdapter<Group, ShowRow, GroupHolder, Holder> {
 
         private LayoutInflater inflater;
 
@@ -196,7 +196,7 @@ public class PersonActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindChildViewHolder(@NonNull Holder holder, int i, int j, DisplayRow item) {
+        public void onBindChildViewHolder(@NonNull Holder holder, int i, int j, ShowRow item) {
             holder.bind(item);
         }
     }
@@ -235,7 +235,7 @@ public class PersonActivity extends AppCompatActivity {
             Id = new String();
         }
 
-        void bind(DisplayRow row) {
+        void bind(ShowRow row) {
             rowType = row.getType();
             Id = row.getIdOfRow();
 

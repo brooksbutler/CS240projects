@@ -67,10 +67,3 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
-
-
-// flag activity clear top
-// flag activity single top
-// Setting flags with intents
-
-//

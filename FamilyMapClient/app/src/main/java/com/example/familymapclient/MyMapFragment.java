@@ -237,5 +237,4 @@ public class MyMapFragment extends Fragment  {
     public void setComingFromPerson(Boolean bool){
         comingFromPerson = bool;
     }
-
 }

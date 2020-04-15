@@ -1,12 +1,12 @@
 package com.example.familymapclient;
 
-public class DisplayRow {
+public class ShowRow {
     String topRow;
     String bottomRow;
     String type;
     String IDOfRow;
 
-    public DisplayRow(String topRow, String bottomRow, String type, String ID){
+    public ShowRow(String topRow, String bottomRow, String type, String ID){
         this.topRow = topRow;
         this.bottomRow = bottomRow;
         this.type = type;

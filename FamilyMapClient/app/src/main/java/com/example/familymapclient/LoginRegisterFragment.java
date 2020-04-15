@@ -14,8 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
-import com.example.familymapclient.R;
-
 import Request.LoginRequest;
 import Request.RegisterRequest;
 
@@ -93,7 +91,7 @@ public class LoginRegisterFragment extends Fragment {
         myRegisterRequest.setGender("m");
         View v = inflater.inflate(R.layout.fragment_login_register, container, false);
 
-        mySignInButton = (Button) v.findViewById(R.id.signInbutton);
+        mySignInButton =  v.findViewById(R.id.signInbutton);
         mySignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +99,7 @@ public class LoginRegisterFragment extends Fragment {
             }
         });
 
-        myRegisterButton = (Button) v.findViewById(R.id.registerButton);
+        myRegisterButton = v.findViewById(R.id.registerButton);
         myRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,12 +108,12 @@ public class LoginRegisterFragment extends Fragment {
         });
 
 
-        myServerHostEditField = (EditText) v.findViewById(R.id.serverHostEditText);
+        myServerHostEditField = v.findViewById(R.id.serverHostEditText);
         myServerHostEditField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(
                     CharSequence s, int start, int count, int after) {
-                // This space intentionally left blank
+
             }
 
             @Override
@@ -133,12 +131,12 @@ public class LoginRegisterFragment extends Fragment {
             }
         });
 
-        myServerPortEditField = (EditText) v.findViewById(R.id.serverPortEditText);
+        myServerPortEditField = v.findViewById(R.id.serverPortEditText);
         myServerPortEditField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(
                     CharSequence s, int start, int count, int after) {
-                // This space intentionally left blank
+
             }
 
 
@@ -157,12 +155,12 @@ public class LoginRegisterFragment extends Fragment {
         });
 
 
-        myUserNameEditField = (EditText) v.findViewById(R.id.userNameEditText);
+        myUserNameEditField = v.findViewById(R.id.userNameEditText);
         myUserNameEditField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(
                     CharSequence s, int start, int count, int after) {
-                // This space intentionally left blank
+
             }
 
             @Override
@@ -179,12 +177,12 @@ public class LoginRegisterFragment extends Fragment {
             }
         });
 
-        myPasswordEditField = (EditText) v.findViewById(R.id.passwordEditText);
+        myPasswordEditField =  v.findViewById(R.id.passwordEditText);
         myPasswordEditField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(
                     CharSequence s, int start, int count, int after) {
-                // This space intentionally left blank
+
             }
 
             @Override
@@ -203,15 +201,12 @@ public class LoginRegisterFragment extends Fragment {
 
         checkLoginFieldsForEmptyValues();
 
-
-        //From here on out it's only for register requests
-
-        myFirstNameEditField = (EditText) v.findViewById(R.id.firstNameEditText);
+        myFirstNameEditField =  v.findViewById(R.id.firstNameEditText);
         myFirstNameEditField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(
                     CharSequence s, int start, int count, int after) {
-                // This space intentionally left blank
+
             }
 
             @Override
@@ -226,12 +221,12 @@ public class LoginRegisterFragment extends Fragment {
             }
         });
 
-        myLastNameEditField = (EditText) v.findViewById(R.id.lastNameEditText);
+        myLastNameEditField =  v.findViewById(R.id.lastNameEditText);
         myLastNameEditField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(
                     CharSequence s, int start, int count, int after) {
-                // This space intentionally left blank
+
             }
 
             @Override
@@ -246,12 +241,12 @@ public class LoginRegisterFragment extends Fragment {
             }
         });
 
-        myEmailEditField = (EditText) v.findViewById(R.id.emailEditText);
+        myEmailEditField = v.findViewById(R.id.emailEditText);
         myEmailEditField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(
                     CharSequence s, int start, int count, int after) {
-                // This space intentionally left blank
+
             }
 
             @Override
@@ -266,7 +261,7 @@ public class LoginRegisterFragment extends Fragment {
             }
         });
 
-        genderGroup = (RadioGroup) v.findViewById(R.id.radioGroup);
+        genderGroup = v.findViewById(R.id.radioGroup);
         genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -296,10 +291,5 @@ public class LoginRegisterFragment extends Fragment {
         RegisterTask registerTask = new RegisterTask(this,whereICameFrom);
         registerTask.execute(myRegisterRequest);
     }
-/*
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction();
-    }
-*/
 
 }

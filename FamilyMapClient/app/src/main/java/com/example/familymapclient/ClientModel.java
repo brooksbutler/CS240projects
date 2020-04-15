@@ -30,10 +30,6 @@ public class ClientModel {
     private boolean showFemaleEvents = true;
     private boolean showMaleEvents = true;
 
-
-    /**
-     * Create private constructor
-     */
     private ClientModel() {
         peopleMap = new HashMap<>();
         peopleEventMap = new HashMap<>();
@@ -49,9 +45,6 @@ public class ClientModel {
         loggedIn = false;
     }
 
-    /**
-     * Create a static method to get instance.
-     */
     public static ClientModel getInstance() {
         if (myObj == null) {
             myObj = new ClientModel();
