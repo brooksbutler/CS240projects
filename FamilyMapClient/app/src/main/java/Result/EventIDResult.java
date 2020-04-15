@@ -74,6 +74,11 @@ public class EventIDResult {
         return message;
     }
 
+    public String getDescription(){
+        String out = new String(eventType + ": " + city + ", " + country + "(" + year + ")");
+        return out;
+    }
+
     public void setUserName(String userName) { this.associatedUsername = userName; }
 
     public void setEventID(String eventID) { this.eventID = eventID; }

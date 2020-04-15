@@ -69,6 +69,11 @@ public class PersonIDResult {
         return lastName;
     }
 
+    public String getDescription(){
+        String out = new String(firstName + " " + lastName);
+        return out;
+    }
+
     public void setMessage(String s){
         message = s;
     }

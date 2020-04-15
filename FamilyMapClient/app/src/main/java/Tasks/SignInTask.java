@@ -1,6 +1,5 @@
 package Tasks;
 
-
 import android.content.Context;
 import android.os.AsyncTask;
 import androidx.fragment.app.Fragment;
@@ -26,8 +25,6 @@ public class SignInTask extends AsyncTask<LoginRequest, Void, LoginResult> {
         this.myFrag = in;
         myMainActivity = inActivity;
     }
-
-
 
     public LoginResult doInBackground(LoginRequest... myLoginRequest) {
         myRequest = myLoginRequest[0];

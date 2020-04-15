@@ -1,6 +1,5 @@
 package Tasks;
 
-
 import android.content.Context;
 import android.os.AsyncTask;
 import androidx.fragment.app.Fragment;
@@ -15,7 +14,6 @@ import java.net.URL;
 
 import Request.RegisterRequest;
 import Result.PersonGetAllResult;
-import Result.PersonIDResult;
 import Result.RegisterResult;
 
 public class GetPeopleTask extends AsyncTask<String,Void,PersonGetAllResult> {
@@ -57,18 +55,16 @@ public class GetPeopleTask extends AsyncTask<String,Void,PersonGetAllResult> {
         if(android.os.Debug.isDebuggerConnected())
             android.os.Debug.waitForDebugger();
 
-        if (result.isSuccess()){ //was a successful peoppleGetAll
+        if (result.isSuccess()){
             ClientModel cm = ClientModel.getInstance();
             cm.setPeople(myResult.getData());
 
-            //Now making EventGetAll task
             GetEventsTask eventTask = new GetEventsTask(myFrag, taskRequest, whereICameFrom, stringForToastIfSuccessful);
             String url = new String("http://" + taskRequest.getServerHost() + ":" + taskRequest.getServerPort() + "/event/");
             eventTask.execute(url, responseFromRegister.getAuthToken());
 
 
-        } else { //was not a successful peopleGetAll
-            //display failed register toast
+        } else {
             Toast.makeText(myFrag.getContext(),
                     R.string.registerNotSuccessfulPeopleGetAll,
                     Toast.LENGTH_SHORT).show();

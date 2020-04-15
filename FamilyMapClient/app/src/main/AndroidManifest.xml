@@ -15,16 +15,44 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <meta-data
-            android:name="com.google.android.actions"
-            android:resource="@xml/network_security_config" />
 
-        <activity android:name=".MainActivity">
+        <uses-library android:name = "org.apache.http.legacy" android:required = "false" />
+
+        <activity
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".EventActivity"
+            android:label="@string/title_activity_my_map"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".PersonActivity"
+            android:label="@string/personLabel"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/familysettings"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".SearchActivity"
+            android:label="@string/familyMapSearchLabel"
+            android:launchMode="singleTop"
+            android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
         </activity>
     </application>
 

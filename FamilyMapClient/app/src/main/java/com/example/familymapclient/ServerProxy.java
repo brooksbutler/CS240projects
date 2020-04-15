@@ -11,7 +11,6 @@ import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import Model.PersonModel;
 import ObjectCodeDecode.Decoder;
 import ObjectCodeDecode.Encoder;
 import Request.LoginRequest;
@@ -31,14 +30,11 @@ public class ServerProxy {
             connection.setDoOutput(true);
             connection.addRequestProperty("Accept", "application/json");
 
-            //connect maybe goes here
-
             String json = Encoder.encode(loginRequest);
 
             OutputStream reqBody = connection.getOutputStream();
             writeString(json, reqBody);
             reqBody.close();
-
             connection.connect();
 
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {

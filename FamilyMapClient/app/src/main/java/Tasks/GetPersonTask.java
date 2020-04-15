@@ -5,23 +5,18 @@ import android.os.AsyncTask;
 import androidx.fragment.app.Fragment;
 import android.widget.Toast;
 
-import com.example.familymapclient.MainActivity;
 import com.example.familymapclient.R;
 import com.example.familymapclient.ServerProxy;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import Model.PersonModel;
 import Request.LoginRequest;
 import Request.RegisterRequest;
 import Result.LoginResult;
 import Result.PersonIDResult;
 import Result.RegisterResult;
 
-/**
- * Created by pjohnst5 on 11/17/17.
- */
 
 public class GetPersonTask extends AsyncTask<String, Void, PersonIDResult> {
     PersonIDResult person;
@@ -78,8 +73,5 @@ public class GetPersonTask extends AsyncTask<String, Void, PersonIDResult> {
                     R.string.loginNotSuccessfulPerson,
                     Toast.LENGTH_SHORT).show();
         }
-
     }
-
-
 }

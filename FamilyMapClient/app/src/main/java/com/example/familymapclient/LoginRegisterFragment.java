@@ -16,17 +16,13 @@ import android.widget.RadioGroup;
 
 import com.example.familymapclient.R;
 
-
 import Request.LoginRequest;
 import Request.RegisterRequest;
 
 import Tasks.RegisterTask;
 import Tasks.SignInTask;
 
-
 public class LoginRegisterFragment extends Fragment {
-
-
     private LoginRequest myLoginRequest;
     private RegisterRequest myRegisterRequest;
     private EditText myServerHostEditField;
@@ -40,10 +36,6 @@ public class LoginRegisterFragment extends Fragment {
     private Button mySignInButton;
     private Button myRegisterButton;
     private static Context whereICameFrom;
-    private String serverHost;
-    private String serverPort;
-
-    //private OnFragmentInteractionListener mListener;
 
     public LoginRegisterFragment() {
 

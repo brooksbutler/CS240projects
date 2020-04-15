@@ -65,12 +65,10 @@ public class GetEventsTask extends AsyncTask<String,Void, EventGetAllResult> {
                     stringForToasIfSuccessful,
                     Toast.LENGTH_SHORT).show();
 
-            //This is when we call onLoginRegisterSuccess for when we are both logging in and registering
             MainActivity source = (MainActivity) whereICameFrom;
             source.onLoginRegisterSuccess();
 
-        } else { //was not a successful eventGetAll
-            //display failed eventGetAll toast
+        } else {
             Toast.makeText(myFrag.getContext(),
                     R.string.registerNotSuccessfulEventGetALL,
                     Toast.LENGTH_SHORT).show();

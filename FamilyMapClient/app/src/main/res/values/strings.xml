@@ -24,7 +24,6 @@
     <string name="introMapMessageOne">Click on a marker</string>
     <string name="introMapMessageTwo">to see event details</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_my_map">Family Map</string>
     <string name="personLabel">Family Map: Person Details</string>
@@ -37,6 +36,17 @@
     <string name="show_tree_lines">SHOW TREE LINES</string>
     <string name="spouse_lines_string">Spouse Lines</string>
     <string name="show_spouse_lines">SHOW SPOUSE LINES</string>
+
+    <string name="fathers_side_string">Father side</string>
+    <string name="show_father_side">FILTER BY FATHER SIDE OF THE FAMILY</string>
+    <string name="mothers_side_string">Mother side</string>
+    <string name="show_mother_side">FILTER BY MOTHER SIDE OF THE FAMILY</string>
+    <string name="male_events_string">Male events</string>
+
+    <string name="show_male_events">FILTER EVENTS BASED ON GENDER</string>
+    <string name="female_events_string">Female events</string>
+    <string name="show_female_events">FILTER EVENTS BASED ON GENDER</string>
+
     <string name="background_display_on_map">BACKGROUND DISPLAY ON MAP</string>
     <string name="from_familymap_service">FROM FAMILYMAP SERVICE</string>
     <string name="re_sync_data">Re-sync Data</string>
@@ -46,9 +56,6 @@
     <string name="returns_to_login_screen">RETURNS TO LOGIN SCREEN</string>
     <string name="familyMapSearchLabel">Family Map: Search</string>
     <string name="nameOfApp">MyApplication</string>
-    <string name="blue">Blue</string>
-    <string name="green">Green</string>
-    <string name="red">Red</string>
     <string name="map_type">Map Type</string>
     <string name="normal">Normal</string>
 </resources>

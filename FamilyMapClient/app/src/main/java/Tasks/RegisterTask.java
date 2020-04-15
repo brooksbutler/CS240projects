@@ -3,11 +3,8 @@ package Tasks;
 import android.content.Context;
 import android.os.AsyncTask;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import android.util.Log;
 import android.widget.Toast;
 
-import com.example.familymapclient.ClientModel;
 import com.example.familymapclient.R;
 import com.example.familymapclient.ServerProxy;
 
@@ -20,13 +17,10 @@ import Result.PersonGetAllResult;
 import Result.RegisterResult;
 
 public class RegisterTask extends AsyncTask<RegisterRequest, Void, RegisterResult> {
-
     private Fragment fragActivity;
     private Context myMainActivity;
     private RegisterRequest taskRequest;
     private RegisterResult answer = new RegisterResult();
-    private PersonGetAllResult peopleAnswer = new PersonGetAllResult();
-    private EventGetAllResult eventAnswer = new EventGetAllResult();
 
     public RegisterTask(Fragment fragAct, Context in){
         this.fragActivity = fragAct;
@@ -56,20 +50,17 @@ public class RegisterTask extends AsyncTask<RegisterRequest, Void, RegisterResul
         if(android.os.Debug.isDebuggerConnected())
             android.os.Debug.waitForDebugger();
 
-        if (result.getSuccess()){ //was a successful register
-
+        if (result.getSuccess()){
             String url = new String ("http://" + taskRequest.getServerHost() + ":" + taskRequest.getServerPort() + "/person/");
             String stringForToastIfSuccessful = new String("Register Success!" + "\n" + taskRequest.getFirstName() + "\n" + taskRequest.getLastName());
 
             GetPeopleTask peopleTask = new GetPeopleTask(fragActivity, taskRequest, result, myMainActivity,stringForToastIfSuccessful);
             peopleTask.execute(url, result.getAuthToken());
 
-        } else { //was not a successful register
-            //display failed register toast
+        } else {
             Toast.makeText(fragActivity.getContext(),
                     R.string.registerNotSuccessful,
                     Toast.LENGTH_SHORT).show();
         }
-
     }
 }
